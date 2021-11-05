@@ -1,0 +1,1171 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Stories | Leuven.AI Stories</title>
+    <link>https://ai.kuleuven.be/stories/post/</link>
+      <atom:link href="https://ai.kuleuven.be/stories/post/index.xml" rel="self" type="application/rss+xml" />
+    <description>Stories</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 03 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://ai.kuleuven.be/stories/media/logo_hu7e319e1ba8cd789af31f3b220e6aab0c_53539_300x300_fit_lanczos_2.png</url>
+      <title>Stories</title>
+      <link>https://ai.kuleuven.be/stories/post/</link>
+    </image>
+    
+    <item>
+      <title>Enabling the energy transition with smart meter data</title>
+      <link>https://ai.kuleuven.be/stories/post/2021-11-03-energy-forecasting/</link>
+      <pubDate>Wed, 03 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>https://ai.kuleuven.be/stories/post/2021-11-03-energy-forecasting/</guid>
+      <description>&lt;div class=&#34;box&#34; style=&#34;border: 1px solid #aaaaaa; box-shadow: 2px 2px 5px #aaaaaa; border-radius:5px; font-size:14px; padding:20px 20px 0px 20px;&#34;&gt;
+&lt;p&gt;The Flanders AI Program, started by the Flemish government, focusses on AI research, implementation, ethics and education. With this program, the Flemish government wants to ensure that Flanders is ready for the AI evolution. The whole program represents a yearly budget of 32 million euros. The research portion of the program (&lt;a href=&#34;https://www.flandersairesearch.be/en&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;The Flanders AI Research program&lt;/a&gt;) aims to strengthen the fundamental research that is already present in Flanders and encourages researchers to apply AI techniques to several use cases in healthcare, Industry 4.0 and government. The program consists of around 120 researchers and has already resulted in more than 100 publications in high quality journals and conferences. In this post, we explore the low voltage grid use case of the program and give a glimpse of the ongoing research.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/br&gt;
+&lt;p&gt;There is an immense energy transition underway as we move from fossil fuels to more renewable energy sources. More and more households become what we now call prosumers: they both consume and produce electricity (e.g. solar panels). In the past, electricity only flowed from the distribution grid to the household, but now, for prosumers, electricity flows from and to the household. In the meantime, the widespread adoption of electrical vehicles (EVs) is underway. The Belgian government is fostering this adoption: by 2026, they want emission-free company cars to be the norm and they are offering tax incentives for the installation of EV charging infrastructure.&lt;/p&gt;
+&lt;p&gt;This ongoing transition influences the way we use electricity. The widespread adoption of EVs, among other factors, is expected to cause a significant increase in electricity demand. Not only do we consume more electricity, we also consume differently, i.e. the electricity consumption patterns are changing. For example, on a sunny day, a neighborhood with lots of solar panels can generate significantly more electricity than what is consumed. Each household with solar panels injects its electricity surplus into the grid at the same time, causing a high simultaneous injection load on the distribution grid. Analogously, when people return from work, they plug in their EVs to charge. In some places with lots of EVs, this might again result in a high simultaneous load on the grid.&lt;/p&gt;
+&lt;p&gt;To meet the changing electricity consumption, the low voltage (LV) distribution grid will need to be reinforced in the near future and doing so cost efficiently is a major challenge. The electrical grid as we know it today was built over the course of the last century using a ‘fit and forget’ strategy: install over-dimensioned cables with sufficient capacity to cover all peaks in electricity demand. Historically, this was a very efficient method as the peak on a cable was typically only 20-30% of the sum of individual peaks of the houses connected to the cable: we do not have our individual highest consumption at the same time. However, as our consumption increases and becomes more synchronized, there is a higher risk that at some point the installed capacity doesn’t suffice and congestion starts to occur. That is, the voltage drops too low or rises too high, leading to appliance malfunctions, and ultimately too high currents blow the cable fuse and the lights go out. Upgrading the grid using the ‘fit and forget’ strategy to handle higher loads would be expensive. The scale of the LV distribution grid is massive; Flanders alone counts 84000km of cable and appr. 3,5 million connection points. To reinforce mere percentages already runs into the hundreds of millions Euro. The main challenge is to support the increasing load on the low voltage grid through a more optimal use of the capacity of the current grid assets and targeted grid reinforcement investments only where necessary.&lt;/p&gt;
+&lt;p&gt;This is one of the challenges that &lt;a href=&#34;https://www.energyville.be/en&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;EnergyVille&lt;/a&gt; (a cooperation between &lt;a href=&#34;https://www.kuleuven.be/english&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;KU Leuven&lt;/a&gt;, &lt;a href=&#34;https://vito.be/en&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;VITO&lt;/a&gt;, &lt;a href=&#34;https://www.imec-int.com/en&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;imec&lt;/a&gt; and  &lt;a href=&#34;https://www.uhasselt.be/en&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;UHasselt&lt;/a&gt;) is tackling in collaboration with &lt;a href=&#34;https://www.fluvius.be/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fluvius&lt;/a&gt;, the Flemish distribution system operator (DSO).&lt;/p&gt;
+&lt;h2 id=&#34;increasing-the-visibility-in-the-low-voltage-grid&#34;&gt;Increasing the visibility in the low voltage grid&lt;/h2&gt;
+&lt;p&gt;The first step towards more cost-effective grid management is to gain a detailed and accurate view on the current state of the LV grid. Obtaining more detailed information about the grid’s layout and state allows us to identify the problematic parts of the grid and to quantify the severity of these problems.&lt;/p&gt;
+&lt;p&gt;To achieve this, EnergyVille is developing ‘digital twin’ capabilities for the LV grid: a set of tools that yields a more detailed view on the grid by applying a combination of AI and Power System Engineering techniques on the available data. One of the central systems in this toolset is a simulation environment that, given the consumption of connected households and the layout of the LV grid, calculates all currents and voltages in the grid (i.e. how the electricity ‘flows’ through the grid). However, consumption measurements in the LV grid - although increasing - remain sparse and our knowledge about the layout of the grid is incomplete and often inaccurate. Therefore, a crucial aspect of the work is to develop tools that correct and enhance the available data.&lt;/p&gt;
+
+
+&lt;div class=&#34;box&#34;&gt;
+  &lt;img src=&#34;overview.png&#34; width=&#34;&#34;&gt;
+  &lt;div class=&#34;fig-caption&#34;&gt;
+    
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;As one of the industrial use cases within the Flanders AI Research program, a collaboration was set up between DTAI-KU Leuven and STADIUS-KU Leuven research groups and EnergyVille to tackle some of the data quality issues and to take the first steps towards predicting problems in the grid ahead of time:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;How can we generate accurate consumption data for households with no or only few available consumption measurements to use in the grid simulation?&lt;/li&gt;
+&lt;li&gt;Can we derive accurate maps of the low voltage grid based on available schematic drawings?&lt;/li&gt;
+&lt;li&gt;Can we forecast congestion problems in the grid ahead of time?&lt;/li&gt;
+&lt;li&gt;Can we reduce the time it takes to simulate the grid for a longer period of time, e.g., a year?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;measuring-the-similarity-between-households-and-clustering-them&#34;&gt;Measuring the similarity between households and clustering them&lt;/h2&gt;
+&lt;p&gt;To be able to simulate the grid, the system developed by EnergyVille needs quarter hour consumption data for every household. However, only for a small portion of households there is such consumption data available for a longer period of time. As such, the goal of this task is to accurately measure the similarity between different consumption profiles. Whenever a profile of a certain household doesn’t have enough data available, we can use consumption data of the most similar complete profiles instead.&lt;/p&gt;
+&lt;p&gt;The biggest challenge when measuring the similarity between energy consumption profiles is that the profiles themselves are very irregular and highly stochastic. For example, one day, a household might cook extensively using the stove, and on another, they may simply use the microwave. The exact time at which they cook might also differ from day to day. As such, comparing the corresponding timestamps of two profiles (e.g. the consumption measured on Jan 1 at 19:15 of profile 1 with the consumption on Jan 1 at 19:15 of profile 2) might consider two profiles highly dissimilar while both profiles actually behave similarly: they cook around the same time (e.g. plus/minus 30 minutes) and both use the stove or microwave to cook (but not always on the same day). Hence, we aim to develop a flexible similarity measure that takes the stochasticity of electricity consumption into account.&lt;/p&gt;
+&lt;p&gt;Based on such a flexible similarity metric, we can apply COBRAS, a clustering algorithm developed at DTAI-KU Leuven. COBRAS takes into account the domain experts knowledge by posing questions to the expert during the clustering process. Embedding this knowledge in the process ensures that the produced clustering is suited for the problem at hand. The resulting clustering allows EnergyVille to study the different types of energy consumers in Belgium and provides an easy way to sample consumption data to use for simulating the grid.&lt;/p&gt;
+&lt;p&gt;For more information see &lt;a href=&#34;https://dtai.cs.kuleuven.be/software/cobras/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the COBRAS webpage&lt;/a&gt; or &lt;a href=&#34;https://dtai.cs.kuleuven.be/stories/post/wannes/time-series-clustering/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;a gentle introduction into using COBRAS for time series&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;deriving-accurate-maps-of-the-low-voltage-grid-from-schematics&#34;&gt;Deriving accurate maps of the low voltage grid from schematics&lt;/h2&gt;
+&lt;p&gt;In addition to consumption data, a simulation of the low voltage grid also requires an accurate map of the grid layout. It is crucial to know which houses are connected to which cables; when many houses attached to the same part of the grid simultaneously experience a peak in energy consumption, that part of the grid is at risk for congestion. Furthermore, to accurately calculate the voltage drop or rise , the length of the cables is required to be known.&lt;/p&gt;
+&lt;p&gt;Unfortunately, only inaccurate schematic drawings of the LV grid are available. These schematics were historically intended for human interpretation. Because of this, they display inaccuracies that can generally be resolved using common sense. When multiple cables run alongside the same side of the road, they are depicted as visually distinct lines, which greatly exaggerates their true distance from one another. Near transformers, where many cables gather, the depiction becomes particularly chaotic. Furthermore, important information such as the knowledge of which houses are connected to which cable is left implicit, to be inferred by the reader. An unfortunate side-effect of these visual simplifications and abstractions is that naive, automated usage of this schematic data is likely to result in some invalid beliefs about the low voltage grid layout.&lt;/p&gt;
+
+
+&lt;div class=&#34;box&#34;&gt;
+  &lt;img src=&#34;gis.png&#34; width=&#34;&#34;&gt;
+  &lt;div class=&#34;fig-caption&#34;&gt;
+    Some example synthetic data as it might appear in a schematic, where the house-to-cable connections have been manually added.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;We are developing novel methods to enhance the available schematic drawings and to derive a more accurate map of the low voltage grid with correct house-to-cable connections. To capture the real-world context with its numerous roads and houses, we enrich the schematics with public geographical information from &lt;a href=&#34;https://www.geopunt.be/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Geopunt Vlaanderen&lt;/a&gt;. While all of this is raw geographical (GIS) data consisting of simple points and lines in a 2D-space, the challenge is to facilitate learning models that capture the visual common sense that underlies the schematics. This is achieved by introducing novel geographical primitives that capture the visual relations between objects, rather than just their coordinates. Examples of such primitives are: “points A and B are on the same side of line C” or “there is no obstruction between point A and B”. Machine learning methods can build upon these concepts to learn more complex and qualitative models, without having to deal with the raw data.&lt;/p&gt;
+&lt;h2 id=&#34;forecasting-households-consumption-24-hours-ahead&#34;&gt;Forecasting households’ consumption 24 hours ahead&lt;/h2&gt;
+&lt;p&gt;One way to forecast congestion problems in the LV grid is to forecast each connected households’ consumption and feed this forecasted consumption into the simulation environment. If the forecast indicates that there might be congestion tomorrow, action can be taken in an effort to prevent it (for example, sending appropriate control signals to devices such as smart heat pumps, smart charging of EVs, home batteries, etc. in order to change their load).&lt;/p&gt;
+&lt;p&gt;However, as mentioned in the clustering task, the consumption profiles are very irregular and stochastic and therefore difficult to forecast. Energy consumption profiles are usually characterized by sudden short high electrical consumption periods, appearing as peaks in the consumption profiles. To forecast congestion accurately it is essential to know when a demand peak will take place and how large the peak will be. However, conventional regression algorithms such as Auto Regressive Integrated Moving Average (ARIMA) and Long Short Term Memory (LSTM) networks struggle to predict these peaks because the input data is highly imbalanced (i.e. lot of low values and only a few high values).&lt;/p&gt;
+
+
+&lt;div class=&#34;box&#34;&gt;
+  &lt;img src=&#34;ts.png&#34; width=&#34;&#34;&gt;
+  &lt;div class=&#34;fig-caption&#34;&gt;
+    
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To sidestep the issues around the imbalance of the input data, we reframe the forecasting (regression) problem as a classification problem. In a regression problem, the algorithm will predict the next value, while in a classification problem, the algorithm will predict whether or not the next value is a peak value. In the reframed problem there will still be significantly more lower values than peak values but in a classification setting there are several approaches to resolve this imbalance. In the next phase, to also predict the size of the peak, we could opt for a multi-class classification problem where a peak value is also classified as low peak, high peak, very high peak, etc… This change in perspective is currently being explored and, if successful, would allow us to increase the congestion prediction performances.&lt;/p&gt;
+
+
+&lt;div class=&#34;box&#34;&gt;
+  &lt;img src=&#34;regress_class.png&#34; width=&#34;&#34;&gt;
+  &lt;div class=&#34;fig-caption&#34;&gt;
+    
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&#34;robust-days-of-year-clustering-of-smart-meter-data&#34;&gt;Robust days-of-year clustering of smart-meter data&lt;/h2&gt;
+&lt;p&gt;As discussed earlier, grid simulations can support distribution system operators in making informed long term strategic decisions. However, performing all the required calculations that simulate the intricate parts of the low voltage grid takes time. Simulating the grid for short periods of time is feasible (e.g. a single day of simulation requires around 14 hours of computation), but simulating for longer periods of time (e.g. a year) becomes problematic in terms of the calculation time. While single-day simulations are useful in assessing specific “worst-case estimates”, full-year simulations are necessary to get a good overall idea about the frequency and severity of congestion problems.&lt;/p&gt;
+&lt;p&gt;Luckily, there might be a way around this problem. A year contains days that are similar to each other, both meteorologically and in energy production/consumption, e.g.,days in the same season, weekends/holidays. As such, instead of simulating every day of the year, we can perform the simulation for a limited number of representative days. This strategy reduces the calculation time of a full-year simulation considerably.  However, in order for this to work, we need a way to select the representative days such that the quality of the reduced simulation is as close as possible to the difficult-to-calculate full-year simulation.&lt;/p&gt;
+
+
+&lt;div class=&#34;box&#34;&gt;
+  &lt;img src=&#34;im5.png&#34; width=&#34;&#34;&gt;
+  &lt;div class=&#34;fig-caption&#34;&gt;
+    
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To select the representative days, we cluster the days of the year based on household electricity consumption and meteorological (e.g. temperature, rainfall, …) time series data; the medoids (i.e. centers) of each cluster are selected as representative days. After preprocessing the timeseries to remove erroneous values and impute missing values, matrix decomposition reduces the dimensionality of the problem and robust k-medoids performs the clustering itself. The (hyper) parameters of the matrix decomposition  and the k-medoids algorithm are optimized through bayesian optimization. A schematic overview of our approach is shown in the figure above.&lt;/p&gt;
+&lt;h2 id=&#34;the-low-voltage-grid-from-barrier-to-enabler-of-the-energy-transition&#34;&gt;The low voltage grid: from barrier to enabler of the energy transition&lt;/h2&gt;
+&lt;p&gt;Without realizing it, we use the LV grid every day; our houses, offices, and schools are connected to it. Each time we leave or enter a building, we pass over or under its myriad of cables. It is a critical infrastructure without which our civilization would fail to function. The various disaster books and movies on nationwide blackouts attest to this. Yet we rarely think of the grid. We have almost forgotten that it is there.&lt;/p&gt;
+&lt;p&gt;This seemingly boring collection of copper and aluminum wires finds itself at the forefront to stop climate change. Renewable electricity is the most important alternative to fossil fuels. This electrical ‘fuel’ that powers our cars and heating systems must now pass over the LV grid. Heating a house with a heat pump and charging the owner’s electrical car roughly triples the household’s electrical consumption and on a sunny day that same house injects its excess local production into the grid. Handling this increased consumption and injection is a formidable challenge that shakes the system. Not in the future, but already today; simply check a random newspaper to see the many articles discussing electric cars, support systems for solar panels, cost of charging infrastructure, etc. The grid is no longer invisible.&lt;/p&gt;
+&lt;p&gt;And so, that is our goal: to help make the LV grid invisible once more. To ensure that we have the technology to minimize the cost of upgrading the grid to support renewable electricity production and the electrification of fossil fuel consumers. To ensure that we have all the data, forecasts and control signals such that our shiny new green devices can respond automatically to the availability of renewable energy while respecting the transport capacity of the local grid. To ensure that the LV grid is no bottleneck for the energy transition but an enabler of it. So we can continue to live our lives in comfort, totally oblivious of what is behind those power sockets in the wall.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Towards Adaptive AI with Continual Learning</title>
+      <link>https://ai.kuleuven.be/stories/post/2021-05-10-continual-learning/</link>
+      <pubDate>Mon, 10 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://ai.kuleuven.be/stories/post/2021-05-10-continual-learning/</guid>
+      <description>&lt;p&gt;Machine learning (ML) is a type of Artificial Intelligence (AI) where machines can learn from huge amounts of data, such as images or text, containing highly complex patterns. Previously, these patterns had to be discovered based on hand-crafted rules of thumb, whereas today the horse-power of machine learning algorithms resides in discovering these patterns automatically. Many contemporary successes are mainly thanks to the resurgence of a specific machine learning algorithm, called artificial neural networks. These neural networks excel in a wide range of relevant tasks, ranging from detecting pedestrians and cars in videos, to &lt;a href=&#34;https://www.nature.com/articles/d41586-021-00530-0&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;generating convincing articles&lt;/a&gt;, and even greatly &lt;a href=&#34;https://deepmind.com/blog/article/alphafold-a-solution-to-a-50-year-old-grand-challenge-in-biology&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;facilitating drug discovery by predicting protein structures&lt;/a&gt;.
+Traditional machine learning typically first learns a model using all the available examples in the data and is then deployed for real-world use. This means that whenever a model has finished learning, it remains unchanged when used in practice. The model&amp;rsquo;s static nature is problematic as it doesn&amp;rsquo;t befit our ever-changing world. For example, with the rise of autonomous vehicles and the internet of things (IoT), data becomes available at previously unprecedented rates and continuously changes over time. This leaves many contemporary machine learning approaches in the dark, as the static model at deployment can&amp;rsquo;t put the never-ending flow of data to use. &lt;strong&gt;Continual Learning&lt;/strong&gt; aims to tackle this problem by taking a closer look at dynamic machine learning models, adapting to the data flexibly and continuously.&lt;/p&gt;
+&lt;h2 id=&#34;overcoming-a-catastrophe&#34;&gt;Overcoming a Catastrophe&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s consider an object detection system for a self-driving car. For safe operation, we give our car the task to detect pedestrians and cyclists. By training our neural network with a large number of samples, it does a remarkable job. However, new object categories emerge all around, such as hoverboards and electrical steps. If we were to update our detection system now with a host of corresponding images for this new task, again it would do a remarkable job at detecting hoverboards and electrical steps. But there is a catch: our system would completely forget about the pedestrians and cyclists in the old task, hence leaving them undetected! This is a phenomenon known as &lt;strong&gt;catastrophic forgetting&lt;/strong&gt; in neural networks.&lt;/p&gt;
+&lt;p&gt;Continual Learning explores how to learn sequentially without this catastrophic forgetting, such that the neural network remembers all learned concepts over time. The most obvious way to remember what is learned from the data, is by simply storing it all and revisiting it later whenever we are about to learn a new task. However, we have to take into account that these data streams might be never-ending, which doesn&amp;rsquo;t abide with the certainly-ending memory in our machines. Therefore, it is paramount to overcome catastrophic forgetting within the predefined memory constraints of our system.&lt;/p&gt;
+&lt;p&gt;A body of Continual Learning methods has been proposed to deal with this issue and can be mainly &lt;a href=&#34;https://arxiv.org/pdf/1909.08383.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;divided within three families&lt;/a&gt;.
+The first family of &lt;em&gt;regularization methods&lt;/em&gt; typically constrains connections between neurons to remain unchanged when they are deemed to be important for an old task. The importance for each connection is tracked to urge new tasks to learn only with connections irrelevant to the old tasks, which &lt;a href=&#34;https://openaccess.thecvf.com/content_ECCV_2018/html/Rahaf_Aljundi_Memory_Aware_Synapses_ECCV_2018_paper.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;greatly alleviates catastrophic forgetting&lt;/a&gt;.
+Secondly, the family of &lt;em&gt;parameter isolation methods&lt;/em&gt; takes another approach by directly allocating a part of the network to each task. As each task is only able to alter its own part of the network, the other tasks can&amp;rsquo;t interfere when learning a new task.
+Finally, the family of &lt;em&gt;replay methods&lt;/em&gt; stores a small part of the seen data, which is then reused later while learning a new task. It&amp;rsquo;s a simple approach but with some additional benefits, which we&amp;rsquo;ll explore in more detail later in this article! But first, we need to explain how neural networks learn and represent the world.&lt;/p&gt;
+&lt;h2 id=&#34;representing-the-world&#34;&gt;Representing the world&lt;/h2&gt;
+&lt;p&gt;Whenever we think about a concept, say a &lt;em&gt;donut&lt;/em&gt;, we can imagine such delight in many varieties, differing in properties such as color and size. Even more so, if we would encounter a sugarcoated torus-shaped pastry in a color we&amp;rsquo;ve never seen before, we are still able to allocate it to this same semantic concept. This is because our human brains often use &lt;a href=&#34;https://www.sciencedirect.com/science/article/abs/pii/0010028572900163&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;representative heuristics&lt;/a&gt;, where each concept is represented by a most representative prototype.&lt;/p&gt;
+&lt;p&gt;Neural networks are built by multiple consecutive layers of neuron-like units, remotely based on neurons in the human brain. Typically, many consecutive layers are used, which is why it is often referred to as &lt;strong&gt;deep learning&lt;/strong&gt;. This hierarchy of layers allows building increasingly complex representations. In case of the donut example, early layers would have some low-level processing like the curved lines and the color, whereas later layers combine these properties to form the representation of the donut. If we now observe a lot of donut images, we can combine all of their representations to make the donut prototype. You can think of this prototype as the most generic, plain donut any other donut would resemble.&lt;/p&gt;
+&lt;p&gt;Eventually, we want such a representative prototype for each of the concepts in our data. In fact, these prototypes capture the most important characteristics of the related concept so well, that when we give a new image to our network it has never seen before (e.g. take a picture with your smartphone), it could tell you which concept&amp;rsquo;s prototype it corresponds to (you took a picture of a donut). This predicting of unseen images is called the &lt;strong&gt;testing&lt;/strong&gt; phase, and can be visualized as in the following:&lt;/p&gt;
+
+
+&lt;div class=&#34;box&#34;&gt;
+  &lt;img src=&#34;mainfig.png&#34; width=&#34;&#34;&gt;
+  &lt;div class=&#34;fig-caption&#34;&gt;
+    In the testing phase, the neural network takes in a new data sample, such as an image of a donut, and produces a representation containing the sample&amp;#39;s characteristics. By matching this representation to the prototypes of the concepts, we can predict the concept with the most similar prototype, which is in this case ideally the donut.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- &lt;img src=&#34;mainfig.png&#34;  width=&#34;800&#34;&gt; --&gt;
+&lt;!-- *In the testing phase, the neural network takes in a new data sample, such as an image of a donut, and produces a representation containing the sample&#39;s characteristics. By matching this representation to the prototypes of the concepts, we can predict the concept with the most similar prototype, which is in this case ideally the donut.* --&gt;
+&lt;p&gt;But in order to obtain these prototypes, we need the neural network to learn in some way from the images it gets presented, this process is called the &lt;strong&gt;training&lt;/strong&gt; phase. First of all, the neural network needs an indication of the concepts in an image, such that its corresponding prototype can be identified. Typically, a human supervisor comes into play, annotating each image with a label, indicating it contains one or the other concept, and hence indicating the prototype each image belongs to.&lt;/p&gt;
+&lt;p&gt;Now that each image is associated with a certain prototype, we can train the neural network by means of an &lt;strong&gt;error function&lt;/strong&gt;. When the representation of the image ends up far from the prototype, we tell the network to make changes in its connections between the neurons, such that the representation becomes more similar to its prototype, and matches less with the other concepts&#39; prototypes. This standard error in machine learning is called the Cross-Entropy error, but has severe limitations when used for continual learning. As we only see images from concepts in our current task, the prototypes of the old task&amp;rsquo;s concepts are uncontrollably changed, such that they are no longer the most generic representation.
+In other words, the old prototypes lose their ability to serve as a good approximation to detect future instances of their related concept. Hence, the old task concepts are prone to catastrophic forgetting. This indicates that for Continual Learning, training clearly needs an alternative for this Cross-Entropy error, maintaining the quality of our prototypes.&lt;/p&gt;
+&lt;h2 id=&#34;evolving-prototypes&#34;&gt;Evolving prototypes&lt;/h2&gt;
+&lt;p&gt;Recent work in the lab of Prof. Tinne Tuytelaars addresses the problem of deteriorating prototypes by means of &lt;strong&gt;Continual Prototype Evolution&lt;/strong&gt;, referred to as &lt;a href=&#34;https://arxiv.org/abs/2009.00919&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CoPE&lt;/a&gt;. The primary goal of this Continual Learning approach is to keep the prototypes for all concepts up-to-date at all times. As the knowledge about our previous concepts resides within our adaptive prototypes, we don&amp;rsquo;t need to store all data for retraining as in standard machine learning approaches. Therefore, if we would determine to add images of new concepts, such as &lt;em&gt;pretzels&lt;/em&gt;, to our collection of pastry images, we don&amp;rsquo;t need to start retraining the neural network all over again, but we can learn from them much like we humans do, without catastrophic forgetting.&lt;/p&gt;
+&lt;p&gt;CoPE belongs to the family of &lt;em&gt;replay&lt;/em&gt; methods, which means it stores a few images from the old tasks in a small buffer. When we learn now from the new pretzel images, we mix them with those from the small buffer to give our neural network the illusion that we actually had all pretzel and other pastry data available at once.&lt;/p&gt;
+&lt;p&gt;In fact, the training phase in CoPE can be divided into two stages. First, it refreshes the prototypes and then uses them to learn better representations. This addresses a first problem with the previously discussed Cross-Entropy error, which updates the prototypes and representations at the same time. In contrast, CoPE first updates the prototypes with the available representations of the new task images mixed with images from the small replay buffer. Only then, the neural network itself is improved to get better representations, while already exploiting the improved prototypes. This can be seen as a type of look-ahead, where the prototype of better quality is used immediately instead of in the next update.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. Update Prototype&lt;/strong&gt;
+
+
+&lt;div class=&#34;box&#34;&gt;
+  &lt;img src=&#34;update_proto_crop.png&#34; width=&#34;&#34;&gt;
+  &lt;div class=&#34;fig-caption&#34;&gt;
+    The donut prototype is slightly changed towards the representation of the donut image. This makes the prototype better in representing all the donut images.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;!-- &lt;img src=&#34;update_proto_crop.png&#34;  width=&#34;600&#34;&gt;
+*The donut prototype is slightly changed towards the representation of the donut image. This makes the prototype better in representing all the donut images.* --&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;2. Update representation using the prototypes&lt;/strong&gt;
+
+
+&lt;div class=&#34;box&#34;&gt;
+  &lt;img src=&#34;update_repr.png&#34; width=&#34;&#34;&gt;
+  &lt;div class=&#34;fig-caption&#34;&gt;
+    The neural network connections are changed to make the representation of the donut image more similar to its prototype and more dissimilar to other concept prototypes such as the croissant prototype.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;!-- &lt;img src=&#34;update_repr.png&#34;  width=&#34;600&#34;&gt;
+*The neural network connections are changed to make the representation of the donut image more similar to its prototype and more dissimilar to other concept prototypes such as the croissant prototype.* --&gt;
+&lt;p&gt;A second problem in the Cross-Entropy error is that it blindly changes all the other concept prototypes, leading to catastrophic forgetting of old concepts. To tackle this issue, CoPE proposes a new Pseudo-Prototypical Proxy error function (PPP error), which doesn&amp;rsquo;t alter &lt;em&gt;any&lt;/em&gt; of the prototypes. Instead, it updates only the representations. This PPP error makes the representations of a concept more similar to their prototype, and decreases similarity to the other concept prototypes. This is reminiscent to contrastive error functions often used in representation learning.
+However, in the PPP error, the representation of each image also acts as a pseudo-prototype for the other representations being processed. Basically, this means that when multiple images of the same &lt;em&gt;donut&lt;/em&gt; concept are being processed, the representation of one image will also be used for the other as a stand-in of the donut prototype. This gives incentive for all images of the same concept to become similar to their prototype, reducing the chance that they end up matching better with a wrong prototype.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Using pseudo-prototypes in the PPP error function:&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;div class=&#34;box&#34;&gt;
+  &lt;img src=&#34;pseudo_proto.png&#34; width=&#34;&#34;&gt;
+  &lt;div class=&#34;fig-caption&#34;&gt;
+    The representation of the second donut image is updated to better match the donut prototype, but also the representation of the first donut image, which acts as a pseudo-prototype.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- &lt;img src=&#34;pseudo_proto.png&#34; width=&#34;600&#34;&gt;
+*The representation of the second donut image is updated to better match the donut prototype, but also the representation of the first donut image, which acts as a pseudo-prototype.* --&gt;
+&lt;p&gt;In conclusion, mixing the next task data with a small replay buffer, combined with addressing these two problems in the Cross-entropy error, shows to have striking improvements over other replay methods when learning from data streams.&lt;/p&gt;
+&lt;p&gt;This introduction to the surging field of Continual Learning and one of its methods are part of a much larger effort. Prof. Tuytelaars&#39; lab has worked on many other aspects of continual learning, among which &lt;a href=&#34;https://arxiv.org/abs/2104.07446&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;a fundamental study of replay&lt;/a&gt;, &lt;a href=&#34;https://openaccess.thecvf.com/content_ECCV_2018/html/Rahaf_Aljundi_Memory_Aware_Synapses_ECCV_2018_paper.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;regularization methods&lt;/a&gt;, &lt;a href=&#34;https://openaccess.thecvf.com/content_CVPR_2019/papers/Aljundi_Task-Free_Continual_Learning_CVPR_2019_paper.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;task-free continual learning&lt;/a&gt;, &lt;a href=&#34;https://openaccess.thecvf.com/content_CVPR_2020/html/De_Lange_Unsupervised_Model_Personalization_While_Preserving_Privacy_and_Scalability_An_Open_CVPR_2020_paper.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;scalable user adaptation&lt;/a&gt;, and an &lt;a href=&#34;https://homes.esat.kuleuven.be/~konijn/publications/2020/DeLange2.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;extensive survey&lt;/a&gt;. Furthermore, her lab is active in the &lt;a href=&#34;https://www.continualai.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ContinualAI&lt;/a&gt; community, maintaining &lt;a href=&#34;https://wiki.continualai.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;a wiki&lt;/a&gt;, &lt;a href=&#34;https://github.com/ContinualAI/avalanche&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;open-source code&lt;/a&gt;, and &lt;a href=&#34;https://sites.google.com/view/clvision2021/overview&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;workshops&lt;/a&gt; that make Continual Learning easily accesible for everyone, and where you can continue your journey if you can&amp;rsquo;t get enough of this topic. Note that we are not responsible for catastrophic forgetting upon reading this article.&lt;/p&gt;
+
+
+&lt;div class=&#34;box&#34;&gt;
+  &lt;img src=&#34;Final_Artwork_cartoon_NN.jpg&#34; width=&#34;&#34;&gt;
+  &lt;div class=&#34;fig-caption&#34;&gt;
+    An illustration of catastrophic forgetting in neural networks. Cartoon credits @Jasper De Lange.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- &lt;img src=&#34;Final_Artwork_cartoon_NN.jpg&#34;  width=&#34;800&#34;&gt;
+*An illustration of catastrophic forgetting in neural networks. Cartoon credits @Jasper De Lange.* --&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Europe as International Standard Setter for Artificial Intelligence: the role of the Council of Europe</title>
+      <link>https://ai.kuleuven.be/stories/post/2021-04-10-cahai/</link>
+      <pubDate>Fri, 02 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>https://ai.kuleuven.be/stories/post/2021-04-10-cahai/</guid>
+      <description>&lt;p&gt;Increased awareness of AI’s risks when left unchecked – from discrimination to surveillance – has driven regulators across the world to work on AI-specific rules. Last year, the European Commission launched a &lt;a href=&#34;https://ec.europa.eu/info/law/better-regulation/have-your-say/initiatives/12270-White-Paper-on-Artificial-Intelligence-a-European-Approach/public-consultation&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;public consultation&lt;/a&gt; about its &lt;a href=&#34;https://ec.europa.eu/info/sites/info/files/commission-white-paper-artificial-intelligence-feb2020_en.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;White Paper on Artificial Intelligence&lt;/a&gt; published in February 2020, to which also Leuven.AI and CiTiP jointly responded. This year, on 30 March 2021, the Council of Europe’s &lt;a href=&#34;https://www.coe.int/en/web/artificial-intelligence/cahai&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CAHAI&lt;/a&gt; launched a &lt;a href=&#34;https://www.coe.int/en/web/artificial-intelligence/cahai-multi-stakeholder-consultation&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;call inviting stakeholders to provide feedback&lt;/a&gt; about its &lt;a href=&#34;https://rm.coe.int/cahai-2020-23-final-eng-feasibility-study-/1680a0c6da&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Feasibility Study&lt;/a&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; and important regulatory choices to take with regard to artificial intelligence.&lt;/p&gt;
+&lt;p&gt;Time to find out more about what kind of organisation the Council of Europe is, what it is doing in the area of AI, and why it is important to take part in the discussion! CiTiP’s &lt;a href=&#34;https://www.law.kuleuven.be/citip/en/staff-members/staff/00143950&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Eyup Kun&lt;/a&gt; had an interview with Leuven.AI members &lt;a href=&#34;https://ai.kuleuven.be/members/00018835&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Peggy Valcke&lt;/a&gt; and &lt;a href=&#34;https://ai.kuleuven.be/members/00117274&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Nathalie Smuha&lt;/a&gt; about the Council of Europe and its activities in relation to AI.&lt;/p&gt;
+&lt;div&gt;
+  &lt;div style=&#34;width:33%; height:225px; float:left; text-align:left;&#34;&gt;
+&lt;figure  id=&#34;figure-peggy-valcke&#34;&gt;
+  &lt;div class=&#34;figure-img-wrap&#34; &gt;
+      &lt;img alt=&#34;Peggy Valcke&#34; srcset=&#34;
+             /stories/post/2021-04-10-cahai/valcke_hude62c9a716a0c4de80fd185dd8abe039_40225_3bc1ddda45615baa6ed9e785d2464820.jpeg 400w,
+             /stories/post/2021-04-10-cahai/valcke_hude62c9a716a0c4de80fd185dd8abe039_40225_1f0d4023fd416e29bb5a0cb086e6343b.jpeg 760w,
+             /stories/post/2021-04-10-cahai/valcke_hude62c9a716a0c4de80fd185dd8abe039_40225_1200x1200_fit_q75_lanczos.jpeg 1200w&#34;
+             src=&#34;https://ai.kuleuven.be/stories/stories/post/2021-04-10-cahai/valcke_hude62c9a716a0c4de80fd185dd8abe039_40225_3bc1ddda45615baa6ed9e785d2464820.jpeg&#34;
+             width=&#34;150px&#34;
+             height=&#34;400&#34;
+             loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;&lt;figcaption&gt;
+      Peggy Valcke
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/div&gt;
+  &lt;div style=&#34;width:33%; height:225px; float:left; text-align:left;&#34;&gt;
+&lt;figure  id=&#34;figure-nathalie-smuha&#34;&gt;
+  &lt;div class=&#34;figure-img-wrap&#34; &gt;
+      &lt;img alt=&#34;Nathalie Smuha&#34; srcset=&#34;
+             /stories/post/2021-04-10-cahai/nathalie2_hu4f4b681310c338906a3eb826472b2fae_204261_e5d2b64f6212cb36005ab3cd2741a237.jpg 400w,
+             /stories/post/2021-04-10-cahai/nathalie2_hu4f4b681310c338906a3eb826472b2fae_204261_edcb55bc2151ae3edadb13cd2d7fc008.jpg 760w,
+             /stories/post/2021-04-10-cahai/nathalie2_hu4f4b681310c338906a3eb826472b2fae_204261_1200x1200_fit_q75_lanczos.jpg 1200w&#34;
+             src=&#34;https://ai.kuleuven.be/stories/stories/post/2021-04-10-cahai/nathalie2_hu4f4b681310c338906a3eb826472b2fae_204261_e5d2b64f6212cb36005ab3cd2741a237.jpg&#34;
+             width=&#34;150px&#34;
+             height=&#34;400&#34;
+             loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;&lt;figcaption&gt;
+      Nathalie Smuha
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/div&gt;
+  &lt;div style=&#34;width:33%; height:225px; float:left; text-align:right&#34;&gt;
+&lt;figure  id=&#34;figure-eyup-kun&#34;&gt;
+  &lt;div class=&#34;figure-img-wrap&#34; &gt;
+      &lt;img alt=&#34;Eyup Kun&#34; srcset=&#34;
+             /stories/post/2021-04-10-cahai/eyup_kun_hu0d930b7077cc615d9128e569aecf23d9_42303_cd217930f84e142e0aea500bf0936b2b.jpg 400w,
+             /stories/post/2021-04-10-cahai/eyup_kun_hu0d930b7077cc615d9128e569aecf23d9_42303_729de6a6afbd9ef4181c5af45cfc41b0.jpg 760w,
+             /stories/post/2021-04-10-cahai/eyup_kun_hu0d930b7077cc615d9128e569aecf23d9_42303_1200x1200_fit_q75_lanczos.jpg 1200w&#34;
+             src=&#34;https://ai.kuleuven.be/stories/stories/post/2021-04-10-cahai/eyup_kun_hu0d930b7077cc615d9128e569aecf23d9_42303_cd217930f84e142e0aea500bf0936b2b.jpg&#34;
+             width=&#34;150px&#34;
+             height=&#34;400&#34;
+             loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;&lt;figcaption&gt;
+      Eyup Kun
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;interview-questioner&#34;&gt;
+Peggy, Nathalie, maybe we should start with what exactly is the Council of Europe and what is its role in relation to digital technologies such as AI?
+&lt;/div&gt;
+&lt;div class=&#34;interview-left&#34; style=&#34;overflow:hidden&#34;&gt;
+&lt;p&gt;&lt;span class=&#34;interview-respondent&#34;&gt;Peggy:&lt;/span&gt; The Council of Europe is &lt;a href=&#34;https://www.coe.int/nl/web/about-us/do-not-get-confused&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;not to be confused with&lt;/a&gt; the European Council. The latter is an institution of the European Union, the economic and political union of 27 Member States on the continent. The former is actually Europe&amp;rsquo;s oldest political organisation and stands separate from the European Union; it was founded in 1949, in the aftermath of the Second World War. The Council of Europe’s mission is to protect human rights, democracy, and the rule of law in Europe. It currently consists of 47 member States (all Member States of the European Union, and other neighbouring countries such as the United Kingdom, Iceland, Liechtenstein, Norway, Russia, Armenia and Turkey). On the basis of discussion and collaboration among its member States, the Council of Europe can establish binding and non-binding legal instruments. Given that it is an international organisation, the binding nature of its legal instruments stems from states&#39; voluntary commitment to adopt, ratify, and transpose the treaties into their national law. Unlike the European Union, the Council of Europe cannot adopt legal rules that have immediate binding legal force throughout every Member State.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;interview-respondent&#34;&gt;Nathalie:&lt;/span&gt;
+The Council of Europe and its bodies have a significant impact on regulating the digital world from the standpoint of human rights. Firstly, The European Court of Human Rights considers &lt;a href=&#34;https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2021836&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the European Convention on Human Rights (ECHR) as a living instrument&lt;/a&gt;. Although the Convention was established long before the digital revolution, the Court interprets it in a way that ensures consistent protection of human rights among its member states and applies these rights to the context of today. This type of evolutive interpretation allows the Court to include the “right to data protection” as part of the “right to a private life” under Article 8 of the Convention, considering the objective and values embedded under that Article. Also &lt;a href=&#34;https://www.echr.coe.int/documents/research_report_internet_eng.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the case-law of the Court on freedom of expression and access to information&lt;/a&gt; under Article 10 of the Convention continues to have an effect on the regulation of the digital media and access to the Internet among member States.&lt;/p&gt;
+&lt;p&gt;In addition, in the digital field, the Council of Europe succeeded in the first binding international convention on data protection (&lt;a href=&#34;https://www.coe.int/en/web/data-protection/convention108/background&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Convention 108&lt;/a&gt;), which was opened for signature in 1981. This Convention and its modernised version, &lt;a href=&#34;https://www.coe.int/en/web/data-protection/convention108/modernised&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Convention 108+&lt;/a&gt;, aim to ensure safeguards for the protection of personal data and the right to privacy against the challenges of information technologies by providing high-level principles, including data minimisation, transparency and accountability, and by equipping individuals with data subject rights. With its non-binding instruments, the Committee of Ministers adopted &lt;a href=&#34;https://search.coe.int/cm/pages/result_details.aspx?objectid=09000016809e1154&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the recommendation&lt;/a&gt; on human rights impacts of algorithmic systems to the member States. The Consultative Committee of Convention 108 also provides specific guidelines on new regulatory challenges, such as &lt;a href=&#34;https://rm.coe.int/guidelines-on-facial-recognition/1680a134f3&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;recent guidelines on facial recognition technology&lt;/a&gt;. The &lt;a href=&#34;https://www.coe.int/en/web/cybercrime/the-budapest-convention&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Budapest Convention on Cybercrime&lt;/a&gt; is another example of how the Council of Europe acts as a global standard-setting actor in the digital field.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;interview-questioner&#34;&gt;
+You are both very active within the Council of Europe’s CAHAI – what is CAHAI and what is precisely your role?
+&lt;/div&gt;
+&lt;div class=&#34;interview-left&#34;&gt;
+&lt;p&gt;&lt;span class=&#34;interview-respondent&#34;&gt;Peggy:&lt;/span&gt;
+The Ad hoc Committee on Artificial Intelligence (&lt;a href=&#34;https://www.coe.int/en/web/artificial-intelligence/cahai&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CAHAI&lt;/a&gt;) was set up in September 2019 by the Committee of Ministers of the Council of Europe (one of its two governing bodies, besides the Parliamentary Assembly). It was tasked with the mission to examine the feasibility of a legal framework for AI systems (henceforth, Feasibility study) in line with the Council of Europe’s standards on human rights, democracy and the rule of law (see CAHAI’s &lt;a href=&#34;https://rm.coe.int/cahai-2020-2021-rev-en-pdf/16809fc157&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;terms of reference&lt;/a&gt;). It was stressed from the beginning that CAHAI would have to complement, and not duplicate, ongoing legislative efforts both within and outside the Council of Europe. So one of the first tasks that CAHAI took up was an exhaustive mapping of the various initiatives by other international and regional organisations, such as the European Union, the OECD, UNESCO, etc., as well as within the various Council of Europe bodies. CAHAI also collected information about relevant national initiatives. All this information is made available via CAHAI’s website (see &lt;a href=&#34;https://www.coe.int/en/web/artificial-intelligence/cahai&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;https://www.coe.int/en/web/artificial-intelligence/national-initiatives&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;; also keep an eye out for the joint website that will show all initiatives at the &lt;a href=&#34;http://globalpolicy.ai/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;global level&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Shortly after the launch of the Flemish Expert Centre on Data &amp;amp; Society, I was invited by the Flemish authorities to represent Belgium at CAHAI, together with a colleague representing Wallonia. During CAHAI’s first plenary meeting in November 2019, I was elected vice-chair, meaning that I also take part in bureau meetings, have regular contact with CAHAI’s secretariat and follow the various working groups set up within CAHAI from close by.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;interview-respondent&#34;&gt;Nathalie:&lt;/span&gt;
+Since Autumn 2020, I have served as an independent expert on AI policy and regulation to CAHAI. I provided expert guidance in the drafting process of the Feasibility Study, take part in plenary and working group meetings, and work closely with CAHAI’s secretariat for the activities of the Policy Development Group and Legal Frameworks Group. Prior to my involvement with the Council of Europe, I coordinated the work of the European Commission’s High-Level Expert Group on AI - an experience that has proven to be very useful in this context, which also evolves around AI policy.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;interview-questioner&#34;&gt;
+&lt;p&gt;The &lt;a href=&#34;https://rm.coe.int/cahai-2020-23-final-eng-feasibility-study-/1680a0c6da&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Feasibility Study&lt;/a&gt; was adopted by CAHAI in December 2020 and marks an important milestone in its activities. What are important key take-aways?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;interview-left&#34;&gt;
+&lt;p&gt;&lt;span class=&#34;interview-respondent&#34;&gt;Nathalie:&lt;/span&gt;
+The feasibility study first touches upon opportunities and risks arising from the use of AI systems. In terms of opportunities, the study refers to the potential positive impact of AI in numerous domains, for instance by improving current industrial capabilities, the provision of healthcare and educational opportunities. Yet the scale of use of AI systems, and their opacity and complexity, can in some instances also amplify the risks inherent in human decision-making (like unjust biases for example) and cause new risks due to potential &amp;ldquo;vicious feedback loops”. The study therefore elaborates on how AI systems can impact human rights, democracy and the rule of law, taking the rights of the ECHR as a starting point.&lt;/p&gt;
+&lt;p&gt;For instance, AI systems can pose a threat to the right to liberty and security (Article 5), the right to a fair trial (Article 6) and the right to an effective remedy (Article 13), when opaque systems are used in situations where freedom or personal security is at stake. The fact that they can facilitate or amplify unjust bias also poses a risk to the right to non-discrimination (Article 14). Furthermore, the right to privacy (Article 8) entails not only freedom from surveillance, but also the protection and enhancement of human autonomy. Being monitored indiscriminately by AI systems can steer people to think and behave in a specific way, impacting their autonomy. Due to the intrusive nature of some AI systems, especially online platforms for instance, freedom of expression (Article 10) and freedom of assembly and association (Article 11) are not unaffected either. These are just a few examples. Many of these rights are also closely related to safeguarding the integrity of the democratic process and the rule of law, which can hence also be negatively impacted.&lt;/p&gt;
+&lt;p&gt;It’s however important to keep in mind that these risks depend on the application context, the type of technology used and the stakeholders involved. Not all AI systems pose the same type and level of risk.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;interview-questioner&#34;&gt;
+How does the Feasibility Study propose to address these risks? What does it consider to be “main elements of a legal framework” for AI-systems?
+&lt;/div&gt;
+&lt;div class=&#34;interview-left&#34;&gt;
+&lt;p&gt;&lt;span class=&#34;interview-respondent&#34;&gt;Peggy:&lt;/span&gt;
+After analysing the benefits and risks of using AI systems, the feasibility study identifies principles that should be horizontally (i.e. irrespective of the sector or context) applicable to the design, development and use of AI systems. These principles are, among others, human dignity, human freedom and autonomy, non-discrimination, gender equality, fairness and diversity, accountability and transparency.  To operationalise these principles, the study matches them to corresponding concrete rights and obligations. The rights foreseen under the feasibility study are drawn from existing rights (the right to respect for private and family life), new rights tailored to challenges of AI systems (right to a meaning explanation of how AI system works) and clarification of existing rights (the right to physical, psychological and moral integrity in light of AI-based profiling and affect recognition). The feasibility study proposes how these obligations can be allocated to public and private actors, considering their uses and the different phases of AI application.&lt;/p&gt;
+&lt;p&gt;In addition to setting principles and corresponding rights and obligations, the feasibility study, similar to the work of the High-Level Expert Group on AI (&lt;a href=&#34;https://ec.europa.eu/newsroom/dae/document.cfm?doc_id=60419&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;set up by the EU Commission&lt;/a&gt;), recommends a risk-based approach towards the regulation of AI systems. It highlights that the risk of AI systems varies depending on its context and sector used. A risk-based approach will help member states contextualise and set the risk level of AI systems in the different uses and provide tailored mechanisms for various risks identified. Where needed, the study also recommends that a more prudent precautionary approach (including potential prohibitions) should be considered.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;interview-questioner&#34;&gt;
+What are the options for the Council of Europe Legal Framework according to the feasibility study?
+&lt;/div&gt;
+&lt;div class=&#34;interview-left&#34;&gt;
+&lt;p&gt;&lt;span class=&#34;interview-respondent&#34;&gt;Nathalie:&lt;/span&gt;
+After listing relevant principles, and potential rights and obligations, the feasibility study discusses the potential form of a future legal framework. The study considers the possibility of adopting binding and non-binding legal instruments and how they complement each other. It investigates the possibility of adding an extra protocol to the existing European Convention on Human Rights or to Convention 108+ on privacy, and the option to adopt a new binding convention. Both the advantages and possible shortcomings of all these options are explored, with the conclusion that mere voluntary guidelines are insufficient to protect people against AI’s risks.&lt;/p&gt;
+&lt;p&gt;A legal framework should therefore include both legally binding and non-binding instruments to provide comprehensive protection and guidance, taking the specificities of different sectors and the risks and benefits of AI into account. Equally important, the study recommends practical mechanisms for compliance with the future legal framework, such as human rights impact assessments or auditing and certification mechanisms, as well as follow-up mechanisms and measures for international co-operation to guarantee the framework’s effectiveness.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;interview-questioner&#34;&gt;
+Why should organisations like Leuven.AI participate in CAHAI’s multi-stakeholder consultation?
+&lt;/div&gt;
+&lt;div class=&#34;interview-left&#34;&gt;
+&lt;p&gt;&lt;span class=&#34;interview-respondent&#34;&gt;Peggy &amp;amp; Nathalie:&lt;/span&gt;
+The feedback from the consultation will directly inform CAHAI’s Legal Frameworks Group which is preparing input for a possible European Convention on AI. It is crucial to collect different perspectives, which will feed the ongoing discussion on the regulation of AI systems. Leuven.AI consists of people from different backgrounds, including computer engineers, neuroscientists, lawyers, philosophers, mathematicians. The perspective they bring can have a real impact on how international regulation of AI systems should look like. It is important to understand that such regulation should not be seen as hampering innovation, but as a means to steer innovation in the direction of socially responsible and desirable outcomes. Probably many of you have seen the 1993 movie “Jurrasic Park”? In a famous scene, Jeff Goldblum, who plays a chaos theory expert, tells the owner of a dinosaur theme park that&lt;/p&gt;
+&lt;p class=&#34;quote&#34;&gt;
+“your scientists were so preoccupied with whether or not they could [create dinosaurs from prehistoric DNA] that they didn’t stop to think if they should.”
+&lt;/p&gt;
+&lt;p&gt;Let’s take the time to reflect together on which AI applications we should and should not develop together…&lt;/p&gt;
+&lt;/div&gt;  
+&lt;div class=&#34;interview-questioner&#34; style=&#34;display:block&#34;&gt;
+-- Eyup Kun
+&lt;/div&gt;
+&lt;p&gt;‌
+‌
+‌&lt;/p&gt;
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    In response to the open consultation process, Leuven.AI will organise a discussion to prepare our feedback to the CAHAI proposal. We strongly encourage all Leuven.AI researchers wanting to contribute to future standards of AI regulations to join this discussion. More details to follow soon on &lt;a href=&#34;https://ai.kuleuven.be/&#34;&gt;Leuven.AI&lt;/a&gt;.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;iframe id=&#34;kaltura_player&#34; src=&#34;https://cdnapisec.kaltura.com/p/2375821/sp/237582100/embedIframeJs/uiconf_id/43066731/partner_id/2375821?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_3one67yc&amp;flashvars[streamerType]=auto&amp;amp;flashvars[localizationCode]=en&amp;amp;flashvars[leadWithHTML5]=true&amp;amp;flashvars[sideBarContainer.plugin]=true&amp;amp;flashvars[sideBarContainer.position]=left&amp;amp;flashvars[sideBarContainer.clickToClose]=true&amp;amp;flashvars[chapters.plugin]=true&amp;amp;flashvars[chapters.layout]=vertical&amp;amp;flashvars[chapters.thumbnailRotator]=false&amp;amp;flashvars[streamSelector.plugin]=true&amp;amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;amp;flashvars[dualScreen.plugin]=true&amp;amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;amp;&amp;wid=1_0xao00c4&#34; width=&#34;0&#34; height=&#34;0&#34; allowfullscreen webkitallowfullscreen mozAllowFullScreen allow=&#34;autoplay *; fullscreen *; encrypted-media *&#34; sandbox=&#34;allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation&#34; frameborder=&#34;0&#34; title=&#34;Kaltura Player&#34;&gt;&lt;/iframe&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;For an accessible introduction to CAHAI’s Feasibility Study, you can consult the &lt;a href=&#34;https://www.turing.ac.uk/research/publications/ai-human-rights-democracy-and-rule-law-primer-prepared-council-europe&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Primer&lt;/a&gt; that the Alan Turing Institute and the Council of Europe just published. &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SoccerMix: Representing soccer actions with mixture models</title>
+      <link>https://ai.kuleuven.be/stories/post/2020-12-06-soccermix/</link>
+      <pubDate>Sun, 06 Dec 2020 00:00:00 +0000</pubDate>
+      <guid>https://ai.kuleuven.be/stories/post/2020-12-06-soccermix/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    This content is reposted with permission from the &lt;a href=&#34;https://dtai.cs.kuleuven.be/sports/blog/soccermix:-representing-soccer-actions-with-mixture-models&#34;&gt;DTAI Sports Analytics Blog&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Last year, we introduced our &lt;a href=&#34;https://dtai.cs.kuleuven.be/sports/blog/player-vectors:-characterizing-soccer-players%27-playing-style/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Player Vectors&lt;/a&gt; approach for automatically characterizing a player’s style of play. In the meantime, we haven’t been standing still and developed SoccerMix: an improved approach which takes account of the location &lt;strong&gt;and direction&lt;/strong&gt; in which actions are performed. Beyond this, we have also introduced a methodology for exploring defensive style. Namely, our insight is that the objective of defending is often to prevent certain actions from occurring. Hence, some insights into a team’s defensive style can be found by measuring how a team forces its opponents to deviate from their usual playing style.&lt;/p&gt;
+&lt;p&gt;In this blog post, we describe SoccerMix and illustrate its applicability in three relevant use cases for the 2018/19 Premier League season:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Player comparisons:&lt;/strong&gt; How do the playing styles of Firmino and Agüero differ?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Defensive analysis:&lt;/strong&gt; How did Liverpool force its opponents to deviate from their typical style?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Match analysis:&lt;/strong&gt; Did Liverpool deviate from its usual style in the crucial away match against City in 2018/19?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;playing-style--location--action--direction&#34;&gt;Playing Style = Location + Action + Direction&lt;/h3&gt;
+&lt;p&gt;Previously, our working hypothesis in this area was that a player’s style manifests itself by:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;His or her preferred locations to occupy on the pitch, and&lt;/li&gt;
+&lt;li&gt;Which actions he or she performs in each location&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This hypothesis ignores one crucial piece of information. To illustrate that, consider two right-backs: Trent Alexander-Arnold and Kyle Walker. Alexander-Arnold is known for his creative and adventurous passing style. While sometimes risky, these passes have the potential to generate a lot of danger. In contrast, Walker tends to make shorter and more lateral passes. This difference in style is clearly visible in the passing maps for each player from one general location on the pitch:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img01.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;These show that Alexander-Arnold and Walker tend to move the ball in very different directions from this location, which provides evidence that &lt;strong&gt;the direction players move the ball in from a location is another crucial aspect of playing style&lt;/strong&gt; that should be added to our hypothesis.&lt;/p&gt;
+&lt;h3 id=&#34;the-soccermix-approach&#34;&gt;The SoccerMix Approach&lt;/h3&gt;
+&lt;p&gt;The key challenge then is to come up with a succinct way to capture the action-location-direction relationship for each player. Previously, our &lt;a href=&#34;https://dtai.cs.kuleuven.be/sports/blog/player-vectors:-characterizing-soccer-players%27-playing-style/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Player Vectors&lt;/a&gt; approach used &lt;a href=&#34;https://blog.acolyer.org/2019/02/18/the-why-and-how-of-nonnegative-matrix-factorization/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;non-negative matrix factorization (NMF)&lt;/a&gt; to perform a location-based grouping of actions into a small set of prototypical or canonical actions. To illustrate this idea, the figure below shows the canonical shot actions that we identified.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img02.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Grouping actions on both the location and direction poses several challenges. First, we need to be able to group actions based on both discrete (i.e., action type) and continuous properties. Second, we need to ensure that we group the actions on the right level of granularity. There should not be overly large clusters and similarly we do not want many groups with little or no actions in them. Finally, we need to be able to perform the groupings while accounting for the fact that locations and directions have different notions of similarity. In particular, NMF would struggle to cope with these last two challenges when forced to simultaneously consider both location and direction. This necessitates a fundamentally different approach to grouping actions.&lt;/p&gt;
+&lt;p&gt;SoccerMix finds canonical actions by using &lt;a href=&#34;https://towardsdatascience.com/gaussian-mixture-models-explained-6986aaf5a95&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;mixture models&lt;/a&gt; to group together similar actions on the basis of their start location and direction. Mixture models differ from k-means in two important ways. First, they represent each cluster using a probability distribution instead of a centroid. Second, each object has a probability of belonging to each cluster instead of assigning the object to precisely one cluster. Hence, mixture models are often referred to as a soft version of k-means.&lt;/p&gt;
+&lt;p&gt;SoccerMix uses the following two-step approach for each considered action type.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;First, it performs &lt;strong&gt;a location-based clustering of actions&lt;/strong&gt;. For example, consider the passes made on the right third of the field by Kevin De Bruyne in the 2018/2019 season and one can immediately see some common starting locations. To automatically discover, such groupings, SoccerMix clusters the start locations of all actions using a mixture of Gaussian distributions.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;img03.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Second, it performs &lt;strong&gt;a direction-based soft clustering of actions&lt;/strong&gt; in each location group. To illustrate the intuition, let’s focus on one cluster of De Bruyne’s passes:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;img04.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Here, it is possible to see that De Bruyne tends to play the ball backwards (shown in red), to the right flank (shown in blue) or in a probing, forward manner (shown in green). To capture directionality, we first use an action’s start and end location to derive its direction. Then, SoccerMix clusters all the actions in a location group using a mixture of &lt;a href=&#34;https://en.wikipedia.org/wiki/Von_Mises_distribution&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Von Mises distributions&lt;/a&gt;, which are suitable for circular data. The use of Von Mises distributions are needed to describe backward passes. This is illustrated in the figure below, which shows the learned Von Mises distribution for passes that start in the central midfield. Unlike a Gaussian, a single Von Mises distribution can be fitted to passes close to 170° and -170°.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img05.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The end result of SoccerMix are a number of prototypical actions:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img06.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;what-can-you-do-with-this-analysis&#34;&gt;What can you do with this analysis?&lt;/h3&gt;
+&lt;p&gt;SoccerMix can facilitate a number of interesting analyses, both on the player and team level. Here we will focus on three canonical cases. On the player level, we will show how to compare and contrast the playing style between two players. On the team level, we compare how often a team’s behavior differs in a specific match versus their typical behavior in all other matches.&lt;/p&gt;
+&lt;h4 id=&#34;player-comparisons-how-do-the-playing-style-of-firmino-and-agüero-differ&#34;&gt;Player comparisons: How do the playing style of Firmino and Agüero differ?&lt;/h4&gt;
+&lt;p&gt;Sergio Agüero (Manchester City) and Roberto Firmino (Liverpool) are two world-class strikers. However, they approach the position differently. Agüero’s playing style is more like an out-and-out striker who most dominantly operates around the opponent’s penalty box. Firmino on the other hand is a striker who likes to drop deep and facilitate for Salah and Mane. SoccerMix picks up on this difference. Below we show the relative frequency that each player performs each prototypical shot, take-on, receival and pass. Actions shown in blue mean that Agüero performs the action more often than Firmino does, and those shown in red mean the opposite. Agüero indeed receives the ball more often close to the goal and is more likely to shoot. In contrast, Firmino is more active in receiving and passing the ball in the middle of the field.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img07.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;defensive-analysis-how-did-liverpool-force-its-opponents-to-deviate-from-their-typical-style&#34;&gt;Defensive analysis: How did Liverpool force its opponents to deviate from their typical style?&lt;/h4&gt;
+&lt;p&gt;Analyzing defensive style is much harder as it involves off-the-ball actions such as correct positioning and putting pressure on attackers, which are not recorded in event streams. Our insight is that these off-the-ball actions are often performed with the intention of preventing certain actions from occurring. This suggests that we can gain a partial understanding of defensive style by measuring the effects that a team’s off-the-ball actions have on what on-the-ball actions their opponent performs. More precisely, we analyze how a team forces its opponents to deviate from their usual playing style. To illustrate this, we compare how teams play in their games (1) vs. Liverpool and (2) vs. all other opponents. Liverpool’s opponent is playing from left-to-right, and prototypical actions shown in blue (red) mean that teams perform these actions more (less) often when playing Liverpool than in their other matches.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img08.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;When playing Liverpool, teams tend to be flagged for offside more often than they typically are against other opponents. This indicates a well-synchronized line of defense that employs a very effective offside trap. The crosses show that, although Liverpool limits the number of crosses its opponents perform, this restriction is not symmetric: they allow fewer crosses from the left of defense (the offense’s right) than the right&lt;/p&gt;
+&lt;h4 id=&#34;match-analysis-did-liverpool-deviate-from-its-usual-style-in-the-crucial-away-match-against-city&#34;&gt;Match analysis: Did Liverpool deviate from its usual style in the crucial away match against City?&lt;/h4&gt;
+&lt;p&gt;On January 3rd, 2019, Liverpool held a 6 point lead atop the EPL table when they traveled to play Manchester City in a highly anticipated match. Alas, in their only league loss of the season, &lt;a href=&#34;https://www.theguardian.com/football/2019/jan/03/manchester-city-liverpool-premier-league-match-report&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Liverpool fell 2-1&lt;/a&gt; and ended up missing out on the title to Manchester City by a single point. Using SoccerMix, we see that Manchester City had the front foot and forced Liverpool to play deeper in their own half:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img09.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Prototypical actions shown in red (blue) indicate that Liverpool performed more (less) of these actions in this match than would be typical. We see that Liverpool has many more passes, dribbles, and receivals deep in their own half than is typical.&lt;/p&gt;
+&lt;p&gt;These findings are perhaps not surprising given Manchester City’s strength and the fact that the match took place at the Etihad. To dig deeper, we compare Liverpool’s playing style in this lost match to their earlier match versus Manchester City at Anfield, which they drew.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img10.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;When playing away, Liverpool made noticeably less use of its left flank, performing fewer passes, dribbles, and receivals in that area. This suggests that Liverpool’s left flank players were not functioning very well that match, which is further evidenced by midfielder James Milner and winger Sadio Mané on Liverpool’s left flank being substituted out in the 57th and 77th minute of the match.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This research was &lt;a href=&#34;https://bitbucket.org/ghentdatascience/ecmlpkdd20-papers/raw/master/RT/sub_194.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;published at ECML/PKDD 2020&lt;/a&gt; and the &lt;a href=&#34;https://github.com/ML-KULeuven/soccermix&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;source code&lt;/a&gt; is available online. TD, MVR and JD did the scientific developments. PR helped with writing the blogpost and the visualizations. Data provided by StatsBomb.&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Meet Our Junior AI Researchers</title>
+      <link>https://ai.kuleuven.be/stories/post/2020-11-27-jre/</link>
+      <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
+      <guid>https://ai.kuleuven.be/stories/post/2020-11-27-jre/</guid>
+      <description>&lt;p&gt;Leuven.AI unites more than &lt;a href=&#34;https://ai.kuleuven.be/members&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;75+ senior AI researchers&lt;/a&gt; across the whole university: its campuses, departments, faculties and research groups. Their research would not be possible though without the many junior AI researchers that work in their research groups. Recently, we organised our first Junior Researchers Event, aiming to bring together many of the young talents that will shape the development and application of AI in the coming years and decades in fields as diverse as public health, civil engineering, electrical engineering, computer science, astrology, psychology, human genetics, economics, law, linguistics, material science, mathematics, mechanical engineering, medicine, neuroscience, and computational biology, among others.&lt;/p&gt;
+&lt;p&gt;Through &lt;em&gt;spotlight videos&lt;/em&gt;, junior researchers briefly introduced themselves and their research. These videos are a good representation of the breadth of AI research carried out at KU Leuven and that are articulated through the five strategic &lt;a href=&#34;https://ai.kuleuven.be/research-lines/research-lines&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;research lines&lt;/a&gt; of Leuven.AI. In this Leuven.AI &lt;em&gt;Stories&lt;/em&gt; post, we want to feature the junior researchers that recorded brief spotlight videos to share with us a bit about themselves and their research interests.&lt;/p&gt;
+&lt;h3 id=&#34;ku-leuven-junior-ai-researchers&#34;&gt;KU Leuven junior AI researchers&lt;/h3&gt;
+&lt;p&gt;(Click photos to view short videos presentations.)&lt;/p&gt;
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Jan&amp;#43;Czarnocki/1_4ll4pao8&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image34.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Jan Czarnocki &lt;/h2&gt;
+        &lt;p&gt; Impact of AI and IoT on privacy and data protection. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Dries&amp;#43;Debeer/1_ytgaoy0u&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image09.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Dries Debeer &lt;/h2&gt;
+        &lt;p&gt; Modelling learning behaviour in augmented and virtual realities. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Andre%CC%81&amp;#43;Guilherme&amp;#43;Massano&amp;#43;Tavares/1_jjudrz4s&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image12.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; André Tavares &lt;/h2&gt;
+        &lt;p&gt; Modal analysis and machine learning for structural dynamics. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Victor&amp;#43;Verreet/1_0eehtxdm&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image24.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Victor Verreet &lt;/h2&gt;
+        &lt;p&gt; Integrating continuous variables in hybrid probabilistic logic programming. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Pieter&amp;#43;Delobelle/1_eucayxeo&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image31.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Pieter Delobelle &lt;/h2&gt;
+        &lt;p&gt; Natural language processing, fairness and bias, and their intersection. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Quinten&amp;#43;Van&amp;#43;Baelen/1_p1y692jz&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image41.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Quinten Van Baelen &lt;/h2&gt;
+        &lt;p&gt; Integrating additional knowledge in traditional machine learning methods. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Elisabeth&amp;#43;Heremans/1_7loh11ol&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image47.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Elisabeth Heremans &lt;/h2&gt;
+        &lt;p&gt; Automated sleep staging based on wearable brain monitoring devices. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Zhenxiang&amp;#43;Cao/1_woss0o4z&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image51.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Zhenxiang Cao &lt;/h2&gt;
+        &lt;p&gt; Deep learning for change point detection and time series segmentation. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Jeroen&amp;#43;Ooge/1_xiswuv0x&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image52.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Jeroen Ooge &lt;/h2&gt;
+        &lt;p&gt; Human-Computer-Interfaces related to visual analytics and explainable AI. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Dejana&amp;#43;Ugrenovic/1_b4uzwfn5&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image54.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Dejana Ugrenovic &lt;/h2&gt;
+        &lt;p&gt; Safety-critical, autonomous systems with ML components. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Peter&amp;#43;Coppens/1_c1jyqviz&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image55.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Peter Coppens &lt;/h2&gt;
+        &lt;p&gt; Data-driven dynamical systems identification and control. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Muzaffer&amp;#43;Ayvaz/1_rn9lko8k&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image59.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Muzaffer Ayvaz &lt;/h2&gt;
+        &lt;p&gt; Global optimization of multivariate polynomials using tensor methods. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Jonas&amp;#43;Doumen/1_wjgzyh05&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image11.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Jonas Doumens &lt;/h2&gt;
+        &lt;p&gt; Autonomous agents learning human-like languages. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Klaas&amp;#43;Thoelen/1_ncm4npz8&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image58.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Klaas Thoelen &lt;/h2&gt;
+        &lt;p&gt; Optimization of energy consumption through demand response. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Gavin&amp;#43;Rens/1_r0rowniq&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image01.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Gavin Rens &lt;/h2&gt;
+        &lt;p&gt; Safety in reinforcement learning and optimization in MDP planning. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Matthias&amp;#43;De&amp;#43;Ryck/1_qaqkszef&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image06.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Matthias De Ryck &lt;/h2&gt;
+        &lt;p&gt; Migration from centralized to decentralized logistics systems. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Simon&amp;#43;Vandevelde/1_16frpp5n&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image20.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Simon Vandevelde &lt;/h2&gt;
+        &lt;p&gt; User-friendly representation of domain knowledge with cDMN. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Pierre&amp;#43;Carbonelle/1_se4g8pno&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image36.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Pierre Carbonelle &lt;/h2&gt;
+        &lt;p&gt; Intelligent algorithms for legal applications. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Marjolein&amp;#43;Deryck/1_bk2g8l2k&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image45.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Marjolein Deryck &lt;/h2&gt;
+        &lt;p&gt; Expert knowledge expressions and inference for problem solving. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Roman&amp;#43;Kandinskii/1_mm2mu8po&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image07.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Roman Kandinskii &lt;/h2&gt;
+        &lt;p&gt; Model compression for numerically efficient fluid dynamics modelling. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Jeroen&amp;#43;Audenaert/1_838ohgqf&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image19.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Jeroen Audenaert &lt;/h2&gt;
+        &lt;p&gt; Classification of stellar variability time-series. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Toon&amp;#43;Vanderschueren/1_jcsh6raj&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image22.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Toon Vanderschueren &lt;/h2&gt;
+        &lt;p&gt; Cost-senstitive machine learning for business applications. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Arne&amp;#43;Van&amp;#43;De&amp;#43;Kerchove/1_iagzunp2&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image37.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Arne Van De Kerchove &lt;/h2&gt;
+        &lt;p&gt; Development of brain-computer interfaces. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Thijs&amp;#43;Peirelinck/1_wzeclxfv&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image40.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Thijs Peirelinck &lt;/h2&gt;
+        &lt;p&gt; Demand response optimization using reinforcement learning. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Suzanna&amp;#43;Cuypers/1_2wdb87y0&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image56.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Suzanna Cuypers &lt;/h2&gt;
+        &lt;p&gt; Object detection for improving accuracy of concrete placement. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;image-block&#34;&gt;
+  &lt;div class=&#34;card&#34;&gt;
+    &lt;div class=&#34;card-block&#34;&gt;
+      &lt;div class=img-block-img&gt;
+        &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Jorik&amp;#43;Jooken/1_dnk8ohch&#34; target=&#34;_blank&#34;&gt;
+          &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image65.png&#34;&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=img-block-text&gt;
+        &lt;h2&gt; Jorik Jooken &lt;/h2&gt;
+        &lt;p&gt; Combinatorial optimisation interacting with machine learning. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- &lt;div class=&#34;row&#34;&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    
+      &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Jan+Czarnocki/1_4ll4pao8&#34; target=&#34;_blank&#34;&gt;
+        &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image34.png&#34; width=&#34;100px&#34;&gt;
+      &lt;/a&gt;
+    
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+      &lt;b&gt;Jan Czarnocki&lt;/b&gt;&lt;br/&gt;Impact of AI and IoT on privacy and data protection.
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+      &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Dries+Debeer/1_ytgaoy0u&#34; target=&#34;_blank&#34;&gt;
+        &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image09.png&#34; width=&#34;100px&#34;&gt;
+      &lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+      &lt;b&gt;Dries Debeer&lt;/b&gt;&lt;br/&gt;Modelling learning behaviour in augmented and virtual realities.
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;row&#34;&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Andre%CC%81+Guilherme+Massano+Tavares/1_jjudrz4s&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image12.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;André Tavares&lt;/b&gt;&lt;br/&gt;Modal analysis and machine learning for structural dynamics.
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Victor+Verreet/1_0eehtxdm&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image24.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Victor Verreet&lt;/b&gt;&lt;br/&gt;Integrating continuous variables in hybrid probabilistic logic programming.
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;row&#34;&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Pieter+Delobelle/1_eucayxeo&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image31.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Pieter Delobelle&lt;/b&gt;&lt;br/&gt;Natural language processing, fairness and bias, and their intersection.
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Quinten+Van+Baelen/1_p1y692jz&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image41.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Quinten Van Baelen&lt;/b&gt;&lt;br/&gt;Integrating additional knowledge in traditional machine learning methods.
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;row&#34;&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Elisabeth+Heremans/1_7loh11ol&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image47.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Elisabeth Heremans&lt;/b&gt;&lt;br/&gt;Automated sleep staging based on wearable brain monitoring devices.
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Zhenxiang+Cao/1_woss0o4z&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image51.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Zhenxiang Cao&lt;/b&gt;&lt;br/&gt;Deep learning for change point detection and time series segmentation.
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;row&#34;&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Jeroen+Ooge/1_xiswuv0x&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image52.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Jeroen Ooge&lt;/b&gt;&lt;br/&gt;Human-Computer-Interfaces related to visual analytics and explainable AI.
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Dejana+Ugrenovic/1_b4uzwfn5&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image54.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Dejana Ugrenovic&lt;/b&gt;&lt;br/&gt;Safety-critical, autonomous systems with ML components.
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;row&#34;&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Peter+Coppens/1_c1jyqviz&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image55.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Peter Coppens&lt;/b&gt;&lt;br/&gt;Data-driven dynamical systems identification and control.
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Muzaffer+Ayvaz/1_rn9lko8k&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image59.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Muzaffer Ayvaz&lt;/b&gt;&lt;br/&gt;Global optimization of multivariate polynomials using tensor methods.
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;row&#34;&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Jonas+Doumen/1_wjgzyh05&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image11.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Jonas Doumens&lt;/b&gt;&lt;br/&gt;Autonomous agents learning human-like languages.
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Klaas+Thoelen/1_ncm4npz8&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image58.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Klaas Thoelen&lt;/b&gt;&lt;br/&gt;Optimization of energy consumption through demand response.
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;row&#34;&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Gavin+Rens/1_r0rowniq&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image01.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Gavin Rens&lt;/b&gt;&lt;br/&gt;Safety in reinforcement learning and optimization in MDP planning.
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Matthias+De+Ryck/1_qaqkszef&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image06.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Matthias De Ryck&lt;/b&gt;&lt;br/&gt;Migration from centralized to decentralized logistics systems.
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;row&#34;&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Simon+Vandevelde/1_16frpp5n&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image20.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Simon Vandevelde&lt;/b&gt;&lt;br/&gt;User-friendly representation of domain knowledge with cDMN.
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Pierre+Carbonelle/1_se4g8pno&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image36.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Pierre Carbonelle&lt;/b&gt;&lt;br/&gt;Intelligent algorithms for legal applications.
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;row&#34;&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Marjolein+Deryck/1_bk2g8l2k&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image45.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Marjolein Deryck&lt;/b&gt;&lt;br/&gt;Expert knowledge expressions and inference for problem solving.
+  &lt;/div&gt;
+&lt;/div&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Roman+Kandinskii/1_mm2mu8po&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image07.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Roman Kandinskii&lt;/b&gt;&lt;br/&gt;Model compression for numerically efficient fluid dynamics modelling.
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;row&#34;&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Jeroen+Audenaert/1_838ohgqf&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image19.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Jeroen Audenaert&lt;/b&gt;&lt;br/&gt;Classification of stellar variability time-series.
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Toon+Vanderschueren/1_jcsh6raj&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image22.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Toon Vanderschueren&lt;/b&gt;&lt;br/&gt;Cost-senstitive machine learning for business applications.
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;row&#34;&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Arne+Van+De+Kerchove/1_iagzunp2&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image37.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Arne Van De Kerchove&lt;/b&gt;&lt;br/&gt;Development of brain-computer interfaces.
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Thijs+Peirelinck/1_wzeclxfv&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image40.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Thijs Peirelinck&lt;/b&gt;&lt;br/&gt;Demand response optimization using reinforcement learning.
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;row&#34;&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Suzanna+Cuypers/1_2wdb87y0&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image56.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Suzanna Cuypers&lt;/b&gt;&lt;br/&gt;Object detection for improving accuracy of concrete placement.
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-2&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;a href=&#34;https://kuleuven.mediaspace.kaltura.com/media/Jorik+Jooken/1_dnk8ohch&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ai.kuleuven.be/stories/stories/2020/JRE/image65.png&#34; width=&#34;100px&#34;&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;column col-md-4&#34;&gt;
+    &lt;div class=&#34;vert-center&#34;&gt;
+    &lt;b&gt;Jorik Jooken&lt;/b&gt;&lt;br/&gt;Combinatorial optimisation interacting with machine learning.
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+ --&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

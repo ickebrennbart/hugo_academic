@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Koen Vanthournout | Leuven.AI Stories</title>
+    <link>https://ai.kuleuven.be/stories/author/koen-vanthournout/</link>
+      <atom:link href="https://ai.kuleuven.be/stories/author/koen-vanthournout/index.xml" rel="self" type="application/rss+xml" />
+    <description>Koen Vanthournout</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language>
+    <image>
+      <url>https://ai.kuleuven.be/stories/author/koen-vanthournout/avatar_hu574969239620895ec4b3abd6ee463f1b_224667_270x270_fill_q75_lanczos_center.jpg</url>
+      <title>Koen Vanthournout</title>
+      <link>https://ai.kuleuven.be/stories/author/koen-vanthournout/</link>
+    </image>
+    
+  </channel>
+</rss>

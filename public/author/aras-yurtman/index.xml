@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Aras Yurtman | Leuven.AI Stories</title>
+    <link>https://ai.kuleuven.be/stories/author/aras-yurtman/</link>
+      <atom:link href="https://ai.kuleuven.be/stories/author/aras-yurtman/index.xml" rel="self" type="application/rss+xml" />
+    <description>Aras Yurtman</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language>
+    <image>
+      <url>https://ai.kuleuven.be/stories/author/aras-yurtman/avatar_hu2897c704af1bc39babeae5a0939d8019_582584_270x270_fill_q75_lanczos_center.jpeg</url>
+      <title>Aras Yurtman</title>
+      <link>https://ai.kuleuven.be/stories/author/aras-yurtman/</link>
+    </image>
+    
+  </channel>
+</rss>

@@ -1,0 +1,181 @@
+/***
+  Front page styling
+***/
+
+// for setting content width on front page
+.container{
+  min-width: 95%;
+
+}
+// size of section headings on front page (e.g. recent posts)
+.section-heading h1{
+  font-size: 32px;
+}
+.see-all a{
+  color: #022f67;
+  font-size: 1rem;
+}
+// style for tag links
+.tag-cloud a{
+  color: #022f67;
+  padding: 5px 5px 5px 5px;
+
+//  background-color: #f0f0f0;
+//  border-style: solid;
+//  border-width: 1px;
+//  border-radius: 10px;
+//  border-color: #f0f0f0;
+//  font-size: 14px;
+//  font-weight: normal;
+}
+.tag-cloud a:hover{
+  color: #022f67;
+  text-decoration: none;
+}
+.tag-cloud a:visited{
+  color: #022f67;
+  text-decoration: none;
+}
+
+/***
+  Article page styling
+***/
+// set width of content
+.article-container{
+  max-width:780px; // slightly increased from 760px
+  padding:0 20px 0 20px;
+  margin:0 auto 0 auto;
+  text-align: justify;
+}
+.article-container h1{
+  text-align: left;
+}
+
+
+// color links in text orange - avoid the default blue
+.article-style a{color: orange;}
+.article-style a:visited {color:orange;}
+
+// color links in text orange - avoid the default blue
+.tags-item a{color: #022f67;}
+.tags-item a:visited {color:#022f67;}
+
+
+// define figure caption styling for shortcode figure_caption
+.fig-caption {
+  text-align: center;
+  font-size: 15px;
+  font-style: italic;
+  margin-bottom: 15px;
+  margin-top: -10px;
+}
+
+.big-letter{
+  font-size: 28px;
+  color: orange;
+}
+
+
+.card-simple {
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  border: 2px solid #022f67;
+  border-radius: 10px;
+  margin-top: 25px;
+  padding: 15px 20px 15px 20px;
+  max-width: 750px;
+}
+
+.media.stream-item {
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  border: 2px solid #022f67;
+  border-radius: 10px;
+  margin-top: 5px;
+  padding: 10px 20px 0px 20px;
+}
+
+.tags-item{
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  border: 2px solid #022f67;
+  border-radius: 10px;
+  margin-top: 15px;
+  padding: 0px 20px 0px 20px;
+  white-space: nowrap;
+}
+
+
+.interview-questioner{
+  color: #287AA0;
+  text-align: right;
+  font-weight: bold;
+  padding-top: 25pt;
+  padding-bottom: 25pt;
+  float: right;
+  width: 50%;
+  margin-left: 50%;
+}
+
+.interview-respondent{
+  // color: #022f67;
+  font-weight: bold;
+}
+
+.interview-left{
+  width:90%;
+  text-align: justify;
+}
+
+.image-row{
+  white-space: nowrap;
+}
+
+.quote{
+  font-style: italic;
+  font-size: 20px;
+  width: 80%;
+  margin-left: 10%;
+}
+
+.figure-img-wrap:hover{
+  opacity:0.75;
+}
+
+.image-block{
+  width:48%;
+  float: left;
+  margin: 0px 1% 0px 1%;
+}
+
+.img-block-img{
+  display: inline-block;
+  vertical-align: top;
+  height: 225px;
+  width:45%;
+  float:left;
+  margin: 0px 2.5% 10px 2.5%;
+  overflow: hidden;
+}
+
+.img-block-img img{
+  transition: transform .5s ease;
+}
+
+.img-block-img:hover img {
+  transform: scale(1.1);
+}
+
+.img-block-text{
+   display: inline-block;
+   width:45%;
+   float:left;
+   margin: 15px 2.5% 10px 2.5%;
+   text-align: left;
+}
+
+.img-block-text h2{
+  font-size: 18px;
+  font-weight: bold;
+  color:#022f67;
+}

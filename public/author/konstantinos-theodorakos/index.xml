@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Konstantinos Theodorakos | Leuven.AI Stories</title>
+    <link>https://ai.kuleuven.be/stories/author/konstantinos-theodorakos/</link>
+      <atom:link href="https://ai.kuleuven.be/stories/author/konstantinos-theodorakos/index.xml" rel="self" type="application/rss+xml" />
+    <description>Konstantinos Theodorakos</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language>
+    <image>
+      <url>https://ai.kuleuven.be/stories/author/konstantinos-theodorakos/avatar_hu17cd15d4450d0914570264d0350a497d_5426_270x270_fill_q75_lanczos_center.jpeg</url>
+      <title>Konstantinos Theodorakos</title>
+      <link>https://ai.kuleuven.be/stories/author/konstantinos-theodorakos/</link>
+    </image>
+    
+  </channel>
+</rss>

@@ -1,0 +1,1045 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.0.0-beta.3 for Hugo" />
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Jens Bürger" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="A remaining challenge to many machine learning approaches is the divide between training and deployment of models, limiting their relevance to either very narrow application domains or to short periods of time before new data renders them outdated. In this post, we are presenting state-of-the-art work on Continual Learning, a stream of ML research aiming to make ML models truly adaptive." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://ai.kuleuven.be/stories/post/2021-05-10-continual-learning/" />
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#2962ff" />
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/stories/css/wowchemy.67a2d1f420f52c93efceaa66ec7171a9.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/stories/index.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/stories/media/icon_hufbbf9898faddcd75c9d4ebee3e4f6766_66536_32x32_fill_lanczos_center_2.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/stories/media/icon_hufbbf9898faddcd75c9d4ebee3e4f6766_66536_180x180_fill_lanczos_center_2.png" />
+
+  <link rel="canonical" href="https://ai.kuleuven.be/stories/post/2021-05-10-continual-learning/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image" />
+  
+    <meta property="twitter:site" content="@LeuvenAI" />
+    <meta property="twitter:creator" content="@LeuvenAI" />
+  
+  <meta property="og:site_name" content="Leuven.AI Stories" />
+  <meta property="og:url" content="https://ai.kuleuven.be/stories/post/2021-05-10-continual-learning/" />
+  <meta property="og:title" content="Towards Adaptive AI with Continual Learning | Leuven.AI Stories" />
+  <meta property="og:description" content="A remaining challenge to many machine learning approaches is the divide between training and deployment of models, limiting their relevance to either very narrow application domains or to short periods of time before new data renders them outdated. In this post, we are presenting state-of-the-art work on Continual Learning, a stream of ML research aiming to make ML models truly adaptive." /><meta property="og:image" content="https://ai.kuleuven.be/stories/post/2021-05-10-continual-learning/featured.png" />
+    <meta property="twitter:image" content="https://ai.kuleuven.be/stories/post/2021-05-10-continual-learning/featured.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2021-05-10T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2021-05-10T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ai.kuleuven.be/stories/post/2021-05-10-continual-learning/"
+  },
+  "headline": "Towards Adaptive AI with Continual Learning",
+  
+  "image": [
+    "https://ai.kuleuven.be/stories/post/2021-05-10-continual-learning/featured.png"
+  ],
+  
+  "datePublished": "2021-05-10T00:00:00Z",
+  "dateModified": "2021-05-10T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Matthias De Lange"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Leuven.AI",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ai.kuleuven.be/stories/media/logo_hu7e319e1ba8cd789af31f3b220e6aab0c_53539_192x192_fit_lanczos_2.png"
+    }
+  },
+  "description": "A remaining challenge to many machine learning approaches is the divide between training and deployment of models, limiting their relevance to either very narrow application domains or to short periods of time before new data renders them outdated. In this post, we are presenting state-of-the-art work on Continual Learning, a stream of ML research aiming to make ML models truly adaptive."
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Towards Adaptive AI with Continual Learning | Leuven.AI Stories</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/stories/js/wowchemy-init.min.a6619d6f25661cae20f56f768201cbd0.js"></script>
+
+  
+
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/stories/"><img src="/stories/media/logo_hu7e319e1ba8cd789af31f3b220e6aab0c_53539_0x70_resize_lanczos_2.png" alt="Leuven.AI Stories"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/stories/"><img src="/stories/media/logo_hu7e319e1ba8cd789af31f3b220e6aab0c_53539_0x70_resize_lanczos_2.png" alt="Leuven.AI Stories"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/stories/"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/stories/post/"><span>Stories</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/stories/topics/"><span>Topics</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/stories/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+
+      
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Towards Adaptive AI with Continual Learning</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  <span >
+      <a href="/stories/author/matthias-de-lange/">Matthias De Lange</a></span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 10, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    10 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/stories/category/language-speech-vision/">Language, Speech &amp; Vision</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 377px;">
+  <div style="position: relative">
+    <img src="/stories/post/2021-05-10-continual-learning/featured_hu44ea5b6dda893eee66166a5d6261341d_127054_720x0_resize_lanczos_2.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>Machine learning (ML) is a type of Artificial Intelligence (AI) where machines can learn from huge amounts of data, such as images or text, containing highly complex patterns. Previously, these patterns had to be discovered based on hand-crafted rules of thumb, whereas today the horse-power of machine learning algorithms resides in discovering these patterns automatically. Many contemporary successes are mainly thanks to the resurgence of a specific machine learning algorithm, called artificial neural networks. These neural networks excel in a wide range of relevant tasks, ranging from detecting pedestrians and cars in videos, to <a href="https://www.nature.com/articles/d41586-021-00530-0" target="_blank" rel="noopener">generating convincing articles</a>, and even greatly <a href="https://deepmind.com/blog/article/alphafold-a-solution-to-a-50-year-old-grand-challenge-in-biology" target="_blank" rel="noopener">facilitating drug discovery by predicting protein structures</a>.
+Traditional machine learning typically first learns a model using all the available examples in the data and is then deployed for real-world use. This means that whenever a model has finished learning, it remains unchanged when used in practice. The model&rsquo;s static nature is problematic as it doesn&rsquo;t befit our ever-changing world. For example, with the rise of autonomous vehicles and the internet of things (IoT), data becomes available at previously unprecedented rates and continuously changes over time. This leaves many contemporary machine learning approaches in the dark, as the static model at deployment can&rsquo;t put the never-ending flow of data to use. <strong>Continual Learning</strong> aims to tackle this problem by taking a closer look at dynamic machine learning models, adapting to the data flexibly and continuously.</p>
+<h2 id="overcoming-a-catastrophe">Overcoming a Catastrophe</h2>
+<p>Let&rsquo;s consider an object detection system for a self-driving car. For safe operation, we give our car the task to detect pedestrians and cyclists. By training our neural network with a large number of samples, it does a remarkable job. However, new object categories emerge all around, such as hoverboards and electrical steps. If we were to update our detection system now with a host of corresponding images for this new task, again it would do a remarkable job at detecting hoverboards and electrical steps. But there is a catch: our system would completely forget about the pedestrians and cyclists in the old task, hence leaving them undetected! This is a phenomenon known as <strong>catastrophic forgetting</strong> in neural networks.</p>
+<p>Continual Learning explores how to learn sequentially without this catastrophic forgetting, such that the neural network remembers all learned concepts over time. The most obvious way to remember what is learned from the data, is by simply storing it all and revisiting it later whenever we are about to learn a new task. However, we have to take into account that these data streams might be never-ending, which doesn&rsquo;t abide with the certainly-ending memory in our machines. Therefore, it is paramount to overcome catastrophic forgetting within the predefined memory constraints of our system.</p>
+<p>A body of Continual Learning methods has been proposed to deal with this issue and can be mainly <a href="https://arxiv.org/pdf/1909.08383.pdf" target="_blank" rel="noopener">divided within three families</a>.
+The first family of <em>regularization methods</em> typically constrains connections between neurons to remain unchanged when they are deemed to be important for an old task. The importance for each connection is tracked to urge new tasks to learn only with connections irrelevant to the old tasks, which <a href="https://openaccess.thecvf.com/content_ECCV_2018/html/Rahaf_Aljundi_Memory_Aware_Synapses_ECCV_2018_paper.html" target="_blank" rel="noopener">greatly alleviates catastrophic forgetting</a>.
+Secondly, the family of <em>parameter isolation methods</em> takes another approach by directly allocating a part of the network to each task. As each task is only able to alter its own part of the network, the other tasks can&rsquo;t interfere when learning a new task.
+Finally, the family of <em>replay methods</em> stores a small part of the seen data, which is then reused later while learning a new task. It&rsquo;s a simple approach but with some additional benefits, which we&rsquo;ll explore in more detail later in this article! But first, we need to explain how neural networks learn and represent the world.</p>
+<h2 id="representing-the-world">Representing the world</h2>
+<p>Whenever we think about a concept, say a <em>donut</em>, we can imagine such delight in many varieties, differing in properties such as color and size. Even more so, if we would encounter a sugarcoated torus-shaped pastry in a color we&rsquo;ve never seen before, we are still able to allocate it to this same semantic concept. This is because our human brains often use <a href="https://www.sciencedirect.com/science/article/abs/pii/0010028572900163" target="_blank" rel="noopener">representative heuristics</a>, where each concept is represented by a most representative prototype.</p>
+<p>Neural networks are built by multiple consecutive layers of neuron-like units, remotely based on neurons in the human brain. Typically, many consecutive layers are used, which is why it is often referred to as <strong>deep learning</strong>. This hierarchy of layers allows building increasingly complex representations. In case of the donut example, early layers would have some low-level processing like the curved lines and the color, whereas later layers combine these properties to form the representation of the donut. If we now observe a lot of donut images, we can combine all of their representations to make the donut prototype. You can think of this prototype as the most generic, plain donut any other donut would resemble.</p>
+<p>Eventually, we want such a representative prototype for each of the concepts in our data. In fact, these prototypes capture the most important characteristics of the related concept so well, that when we give a new image to our network it has never seen before (e.g. take a picture with your smartphone), it could tell you which concept&rsquo;s prototype it corresponds to (you took a picture of a donut). This predicting of unseen images is called the <strong>testing</strong> phase, and can be visualized as in the following:</p>
+
+
+<div class="box">
+  <img src="mainfig.png" width="">
+  <div class="fig-caption">
+    In the testing phase, the neural network takes in a new data sample, such as an image of a donut, and produces a representation containing the sample&#39;s characteristics. By matching this representation to the prototypes of the concepts, we can predict the concept with the most similar prototype, which is in this case ideally the donut.
+  </div>
+</div>
+
+<!-- <img src="mainfig.png"  width="800"> -->
+<!-- *In the testing phase, the neural network takes in a new data sample, such as an image of a donut, and produces a representation containing the sample's characteristics. By matching this representation to the prototypes of the concepts, we can predict the concept with the most similar prototype, which is in this case ideally the donut.* -->
+<p>But in order to obtain these prototypes, we need the neural network to learn in some way from the images it gets presented, this process is called the <strong>training</strong> phase. First of all, the neural network needs an indication of the concepts in an image, such that its corresponding prototype can be identified. Typically, a human supervisor comes into play, annotating each image with a label, indicating it contains one or the other concept, and hence indicating the prototype each image belongs to.</p>
+<p>Now that each image is associated with a certain prototype, we can train the neural network by means of an <strong>error function</strong>. When the representation of the image ends up far from the prototype, we tell the network to make changes in its connections between the neurons, such that the representation becomes more similar to its prototype, and matches less with the other concepts' prototypes. This standard error in machine learning is called the Cross-Entropy error, but has severe limitations when used for continual learning. As we only see images from concepts in our current task, the prototypes of the old task&rsquo;s concepts are uncontrollably changed, such that they are no longer the most generic representation.
+In other words, the old prototypes lose their ability to serve as a good approximation to detect future instances of their related concept. Hence, the old task concepts are prone to catastrophic forgetting. This indicates that for Continual Learning, training clearly needs an alternative for this Cross-Entropy error, maintaining the quality of our prototypes.</p>
+<h2 id="evolving-prototypes">Evolving prototypes</h2>
+<p>Recent work in the lab of Prof. Tinne Tuytelaars addresses the problem of deteriorating prototypes by means of <strong>Continual Prototype Evolution</strong>, referred to as <a href="https://arxiv.org/abs/2009.00919" target="_blank" rel="noopener">CoPE</a>. The primary goal of this Continual Learning approach is to keep the prototypes for all concepts up-to-date at all times. As the knowledge about our previous concepts resides within our adaptive prototypes, we don&rsquo;t need to store all data for retraining as in standard machine learning approaches. Therefore, if we would determine to add images of new concepts, such as <em>pretzels</em>, to our collection of pastry images, we don&rsquo;t need to start retraining the neural network all over again, but we can learn from them much like we humans do, without catastrophic forgetting.</p>
+<p>CoPE belongs to the family of <em>replay</em> methods, which means it stores a few images from the old tasks in a small buffer. When we learn now from the new pretzel images, we mix them with those from the small buffer to give our neural network the illusion that we actually had all pretzel and other pastry data available at once.</p>
+<p>In fact, the training phase in CoPE can be divided into two stages. First, it refreshes the prototypes and then uses them to learn better representations. This addresses a first problem with the previously discussed Cross-Entropy error, which updates the prototypes and representations at the same time. In contrast, CoPE first updates the prototypes with the available representations of the new task images mixed with images from the small replay buffer. Only then, the neural network itself is improved to get better representations, while already exploiting the improved prototypes. This can be seen as a type of look-ahead, where the prototype of better quality is used immediately instead of in the next update.</p>
+<p><strong>1. Update Prototype</strong>
+
+
+<div class="box">
+  <img src="update_proto_crop.png" width="">
+  <div class="fig-caption">
+    The donut prototype is slightly changed towards the representation of the donut image. This makes the prototype better in representing all the donut images.
+  </div>
+</div>
+</p>
+<!-- <img src="update_proto_crop.png"  width="600">
+*The donut prototype is slightly changed towards the representation of the donut image. This makes the prototype better in representing all the donut images.* -->
+<hr>
+<p><strong>2. Update representation using the prototypes</strong>
+
+
+<div class="box">
+  <img src="update_repr.png" width="">
+  <div class="fig-caption">
+    The neural network connections are changed to make the representation of the donut image more similar to its prototype and more dissimilar to other concept prototypes such as the croissant prototype.
+  </div>
+</div>
+</p>
+<!-- <img src="update_repr.png"  width="600">
+*The neural network connections are changed to make the representation of the donut image more similar to its prototype and more dissimilar to other concept prototypes such as the croissant prototype.* -->
+<p>A second problem in the Cross-Entropy error is that it blindly changes all the other concept prototypes, leading to catastrophic forgetting of old concepts. To tackle this issue, CoPE proposes a new Pseudo-Prototypical Proxy error function (PPP error), which doesn&rsquo;t alter <em>any</em> of the prototypes. Instead, it updates only the representations. This PPP error makes the representations of a concept more similar to their prototype, and decreases similarity to the other concept prototypes. This is reminiscent to contrastive error functions often used in representation learning.
+However, in the PPP error, the representation of each image also acts as a pseudo-prototype for the other representations being processed. Basically, this means that when multiple images of the same <em>donut</em> concept are being processed, the representation of one image will also be used for the other as a stand-in of the donut prototype. This gives incentive for all images of the same concept to become similar to their prototype, reducing the chance that they end up matching better with a wrong prototype.</p>
+<p><strong>Using pseudo-prototypes in the PPP error function:</strong></p>
+
+
+<div class="box">
+  <img src="pseudo_proto.png" width="">
+  <div class="fig-caption">
+    The representation of the second donut image is updated to better match the donut prototype, but also the representation of the first donut image, which acts as a pseudo-prototype.
+  </div>
+</div>
+
+<!-- <img src="pseudo_proto.png" width="600">
+*The representation of the second donut image is updated to better match the donut prototype, but also the representation of the first donut image, which acts as a pseudo-prototype.* -->
+<p>In conclusion, mixing the next task data with a small replay buffer, combined with addressing these two problems in the Cross-entropy error, shows to have striking improvements over other replay methods when learning from data streams.</p>
+<p>This introduction to the surging field of Continual Learning and one of its methods are part of a much larger effort. Prof. Tuytelaars' lab has worked on many other aspects of continual learning, among which <a href="https://arxiv.org/abs/2104.07446" target="_blank" rel="noopener">a fundamental study of replay</a>, <a href="https://openaccess.thecvf.com/content_ECCV_2018/html/Rahaf_Aljundi_Memory_Aware_Synapses_ECCV_2018_paper.html" target="_blank" rel="noopener">regularization methods</a>, <a href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Aljundi_Task-Free_Continual_Learning_CVPR_2019_paper.pdf" target="_blank" rel="noopener">task-free continual learning</a>, <a href="https://openaccess.thecvf.com/content_CVPR_2020/html/De_Lange_Unsupervised_Model_Personalization_While_Preserving_Privacy_and_Scalability_An_Open_CVPR_2020_paper.html" target="_blank" rel="noopener">scalable user adaptation</a>, and an <a href="https://homes.esat.kuleuven.be/~konijn/publications/2020/DeLange2.pdf" target="_blank" rel="noopener">extensive survey</a>. Furthermore, her lab is active in the <a href="https://www.continualai.org/" target="_blank" rel="noopener">ContinualAI</a> community, maintaining <a href="https://wiki.continualai.org/" target="_blank" rel="noopener">a wiki</a>, <a href="https://github.com/ContinualAI/avalanche" target="_blank" rel="noopener">open-source code</a>, and <a href="https://sites.google.com/view/clvision2021/overview" target="_blank" rel="noopener">workshops</a> that make Continual Learning easily accesible for everyone, and where you can continue your journey if you can&rsquo;t get enough of this topic. Note that we are not responsible for catastrophic forgetting upon reading this article.</p>
+
+
+<div class="box">
+  <img src="Final_Artwork_cartoon_NN.jpg" width="">
+  <div class="fig-caption">
+    An illustration of catastrophic forgetting in neural networks. Cartoon credits @Jasper De Lange.
+  </div>
+</div>
+
+<!-- <img src="Final_Artwork_cartoon_NN.jpg"  width="800">
+*An illustration of catastrophic forgetting in neural networks. Cartoon credits @Jasper De Lange.* -->
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/stories/tag/continual-learning/">continual learning</a>
+  
+  <a class="badge badge-light" href="/stories/tag/computer-vision/">computer vision</a>
+  
+  <a class="badge badge-light" href="/stories/tag/adaptive-ai/">adaptive AI</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://ai.kuleuven.be/stories/post/2021-05-10-continual-learning/&amp;text=Towards%20Adaptive%20AI%20with%20Continual%20Learning" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://ai.kuleuven.be/stories/post/2021-05-10-continual-learning/&amp;t=Towards%20Adaptive%20AI%20with%20Continual%20Learning" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Towards%20Adaptive%20AI%20with%20Continual%20Learning&amp;body=https://ai.kuleuven.be/stories/post/2021-05-10-continual-learning/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://ai.kuleuven.be/stories/post/2021-05-10-continual-learning/&amp;title=Towards%20Adaptive%20AI%20with%20Continual%20Learning" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Towards%20Adaptive%20AI%20with%20Continual%20Learning%20https://ai.kuleuven.be/stories/post/2021-05-10-continual-learning/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://ai.kuleuven.be/stories/post/2021-05-10-continual-learning/&amp;title=Towards%20Adaptive%20AI%20with%20Continual%20Learning" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer>
+  <div class="container">
+    
+    <div class="row align-items-center justify-content-center">
+      <span style="padding-right:10px; padding-bottom:10px;">
+        <a href="https://kuleuven.be/" target="_blank"><img src="/stories/media/kuleuven_logo.svg" alt="KU Leuven" width="100px"></a>
+      </span>
+      <span style="padding-right:10px; padding-bottom:6px;">
+        <a href="https://ai.kuleuven.be/" target="_blank"><img src="/stories/media/leuvenai_logo.svg" alt="Leuven AI" width="121px"></a>
+      </span>
+      <span style="padding-right:10px; padding-bottom:6px;">
+        <iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2375821/sp/237582100/embedIframeJs/uiconf_id/43066731/partner_id/2375821?iframeembed=true&playerId=kaltura_player&entry_id=1_5czeu7cc&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_wwmawtrb" width="0" height="0" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Kaltura Player"></iframe>
+      </span>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    <script src="/stories/js/_vendor/bootstrap.bundle.min.f81d0a1705048649befc8b595e455a94.js"></script>
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/stories/en/js/wowchemy.min.0a233ecde900ea57d5cd5ad14636ad45.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

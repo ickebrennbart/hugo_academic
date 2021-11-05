@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Topics overview | Leuven.AI Stories</title>
+    <link>https://ai.kuleuven.be/stories/topics/</link>
+      <atom:link href="https://ai.kuleuven.be/stories/topics/index.xml" rel="self" type="application/rss+xml" />
+    <description>Topics overview</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language>
+    <image>
+      <url>https://ai.kuleuven.be/stories/media/logo_hu7e319e1ba8cd789af31f3b220e6aab0c_53539_300x300_fit_lanczos_2.png</url>
+      <title>Topics overview</title>
+      <link>https://ai.kuleuven.be/stories/topics/</link>
+    </image>
+    
+  </channel>
+</rss>

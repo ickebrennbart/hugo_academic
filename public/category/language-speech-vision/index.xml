@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Language, Speech &amp; Vision | Leuven.AI Stories</title>
+    <link>https://ai.kuleuven.be/stories/category/language-speech-vision/</link>
+      <atom:link href="https://ai.kuleuven.be/stories/category/language-speech-vision/index.xml" rel="self" type="application/rss+xml" />
+    <description>Language, Speech &amp; Vision</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 10 May 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://ai.kuleuven.be/stories/media/logo_hu7e319e1ba8cd789af31f3b220e6aab0c_53539_300x300_fit_lanczos_2.png</url>
+      <title>Language, Speech &amp; Vision</title>
+      <link>https://ai.kuleuven.be/stories/category/language-speech-vision/</link>
+    </image>
+    
+    <item>
+      <title>Towards Adaptive AI with Continual Learning</title>
+      <link>https://ai.kuleuven.be/stories/post/2021-05-10-continual-learning/</link>
+      <pubDate>Mon, 10 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://ai.kuleuven.be/stories/post/2021-05-10-continual-learning/</guid>
+      <description>&lt;p&gt;Machine learning (ML) is a type of Artificial Intelligence (AI) where machines can learn from huge amounts of data, such as images or text, containing highly complex patterns. Previously, these patterns had to be discovered based on hand-crafted rules of thumb, whereas today the horse-power of machine learning algorithms resides in discovering these patterns automatically. Many contemporary successes are mainly thanks to the resurgence of a specific machine learning algorithm, called artificial neural networks. These neural networks excel in a wide range of relevant tasks, ranging from detecting pedestrians and cars in videos, to &lt;a href=&#34;https://www.nature.com/articles/d41586-021-00530-0&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;generating convincing articles&lt;/a&gt;, and even greatly &lt;a href=&#34;https://deepmind.com/blog/article/alphafold-a-solution-to-a-50-year-old-grand-challenge-in-biology&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;facilitating drug discovery by predicting protein structures&lt;/a&gt;.
+Traditional machine learning typically first learns a model using all the available examples in the data and is then deployed for real-world use. This means that whenever a model has finished learning, it remains unchanged when used in practice. The model&amp;rsquo;s static nature is problematic as it doesn&amp;rsquo;t befit our ever-changing world. For example, with the rise of autonomous vehicles and the internet of things (IoT), data becomes available at previously unprecedented rates and continuously changes over time. This leaves many contemporary machine learning approaches in the dark, as the static model at deployment can&amp;rsquo;t put the never-ending flow of data to use. &lt;strong&gt;Continual Learning&lt;/strong&gt; aims to tackle this problem by taking a closer look at dynamic machine learning models, adapting to the data flexibly and continuously.&lt;/p&gt;
+&lt;h2 id=&#34;overcoming-a-catastrophe&#34;&gt;Overcoming a Catastrophe&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s consider an object detection system for a self-driving car. For safe operation, we give our car the task to detect pedestrians and cyclists. By training our neural network with a large number of samples, it does a remarkable job. However, new object categories emerge all around, such as hoverboards and electrical steps. If we were to update our detection system now with a host of corresponding images for this new task, again it would do a remarkable job at detecting hoverboards and electrical steps. But there is a catch: our system would completely forget about the pedestrians and cyclists in the old task, hence leaving them undetected! This is a phenomenon known as &lt;strong&gt;catastrophic forgetting&lt;/strong&gt; in neural networks.&lt;/p&gt;
+&lt;p&gt;Continual Learning explores how to learn sequentially without this catastrophic forgetting, such that the neural network remembers all learned concepts over time. The most obvious way to remember what is learned from the data, is by simply storing it all and revisiting it later whenever we are about to learn a new task. However, we have to take into account that these data streams might be never-ending, which doesn&amp;rsquo;t abide with the certainly-ending memory in our machines. Therefore, it is paramount to overcome catastrophic forgetting within the predefined memory constraints of our system.&lt;/p&gt;
+&lt;p&gt;A body of Continual Learning methods has been proposed to deal with this issue and can be mainly &lt;a href=&#34;https://arxiv.org/pdf/1909.08383.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;divided within three families&lt;/a&gt;.
+The first family of &lt;em&gt;regularization methods&lt;/em&gt; typically constrains connections between neurons to remain unchanged when they are deemed to be important for an old task. The importance for each connection is tracked to urge new tasks to learn only with connections irrelevant to the old tasks, which &lt;a href=&#34;https://openaccess.thecvf.com/content_ECCV_2018/html/Rahaf_Aljundi_Memory_Aware_Synapses_ECCV_2018_paper.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;greatly alleviates catastrophic forgetting&lt;/a&gt;.
+Secondly, the family of &lt;em&gt;parameter isolation methods&lt;/em&gt; takes another approach by directly allocating a part of the network to each task. As each task is only able to alter its own part of the network, the other tasks can&amp;rsquo;t interfere when learning a new task.
+Finally, the family of &lt;em&gt;replay methods&lt;/em&gt; stores a small part of the seen data, which is then reused later while learning a new task. It&amp;rsquo;s a simple approach but with some additional benefits, which we&amp;rsquo;ll explore in more detail later in this article! But first, we need to explain how neural networks learn and represent the world.&lt;/p&gt;
+&lt;h2 id=&#34;representing-the-world&#34;&gt;Representing the world&lt;/h2&gt;
+&lt;p&gt;Whenever we think about a concept, say a &lt;em&gt;donut&lt;/em&gt;, we can imagine such delight in many varieties, differing in properties such as color and size. Even more so, if we would encounter a sugarcoated torus-shaped pastry in a color we&amp;rsquo;ve never seen before, we are still able to allocate it to this same semantic concept. This is because our human brains often use &lt;a href=&#34;https://www.sciencedirect.com/science/article/abs/pii/0010028572900163&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;representative heuristics&lt;/a&gt;, where each concept is represented by a most representative prototype.&lt;/p&gt;
+&lt;p&gt;Neural networks are built by multiple consecutive layers of neuron-like units, remotely based on neurons in the human brain. Typically, many consecutive layers are used, which is why it is often referred to as &lt;strong&gt;deep learning&lt;/strong&gt;. This hierarchy of layers allows building increasingly complex representations. In case of the donut example, early layers would have some low-level processing like the curved lines and the color, whereas later layers combine these properties to form the representation of the donut. If we now observe a lot of donut images, we can combine all of their representations to make the donut prototype. You can think of this prototype as the most generic, plain donut any other donut would resemble.&lt;/p&gt;
+&lt;p&gt;Eventually, we want such a representative prototype for each of the concepts in our data. In fact, these prototypes capture the most important characteristics of the related concept so well, that when we give a new image to our network it has never seen before (e.g. take a picture with your smartphone), it could tell you which concept&amp;rsquo;s prototype it corresponds to (you took a picture of a donut). This predicting of unseen images is called the &lt;strong&gt;testing&lt;/strong&gt; phase, and can be visualized as in the following:&lt;/p&gt;
+
+
+&lt;div class=&#34;box&#34;&gt;
+  &lt;img src=&#34;mainfig.png&#34; width=&#34;&#34;&gt;
+  &lt;div class=&#34;fig-caption&#34;&gt;
+    In the testing phase, the neural network takes in a new data sample, such as an image of a donut, and produces a representation containing the sample&amp;#39;s characteristics. By matching this representation to the prototypes of the concepts, we can predict the concept with the most similar prototype, which is in this case ideally the donut.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- &lt;img src=&#34;mainfig.png&#34;  width=&#34;800&#34;&gt; --&gt;
+&lt;!-- *In the testing phase, the neural network takes in a new data sample, such as an image of a donut, and produces a representation containing the sample&#39;s characteristics. By matching this representation to the prototypes of the concepts, we can predict the concept with the most similar prototype, which is in this case ideally the donut.* --&gt;
+&lt;p&gt;But in order to obtain these prototypes, we need the neural network to learn in some way from the images it gets presented, this process is called the &lt;strong&gt;training&lt;/strong&gt; phase. First of all, the neural network needs an indication of the concepts in an image, such that its corresponding prototype can be identified. Typically, a human supervisor comes into play, annotating each image with a label, indicating it contains one or the other concept, and hence indicating the prototype each image belongs to.&lt;/p&gt;
+&lt;p&gt;Now that each image is associated with a certain prototype, we can train the neural network by means of an &lt;strong&gt;error function&lt;/strong&gt;. When the representation of the image ends up far from the prototype, we tell the network to make changes in its connections between the neurons, such that the representation becomes more similar to its prototype, and matches less with the other concepts&#39; prototypes. This standard error in machine learning is called the Cross-Entropy error, but has severe limitations when used for continual learning. As we only see images from concepts in our current task, the prototypes of the old task&amp;rsquo;s concepts are uncontrollably changed, such that they are no longer the most generic representation.
+In other words, the old prototypes lose their ability to serve as a good approximation to detect future instances of their related concept. Hence, the old task concepts are prone to catastrophic forgetting. This indicates that for Continual Learning, training clearly needs an alternative for this Cross-Entropy error, maintaining the quality of our prototypes.&lt;/p&gt;
+&lt;h2 id=&#34;evolving-prototypes&#34;&gt;Evolving prototypes&lt;/h2&gt;
+&lt;p&gt;Recent work in the lab of Prof. Tinne Tuytelaars addresses the problem of deteriorating prototypes by means of &lt;strong&gt;Continual Prototype Evolution&lt;/strong&gt;, referred to as &lt;a href=&#34;https://arxiv.org/abs/2009.00919&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CoPE&lt;/a&gt;. The primary goal of this Continual Learning approach is to keep the prototypes for all concepts up-to-date at all times. As the knowledge about our previous concepts resides within our adaptive prototypes, we don&amp;rsquo;t need to store all data for retraining as in standard machine learning approaches. Therefore, if we would determine to add images of new concepts, such as &lt;em&gt;pretzels&lt;/em&gt;, to our collection of pastry images, we don&amp;rsquo;t need to start retraining the neural network all over again, but we can learn from them much like we humans do, without catastrophic forgetting.&lt;/p&gt;
+&lt;p&gt;CoPE belongs to the family of &lt;em&gt;replay&lt;/em&gt; methods, which means it stores a few images from the old tasks in a small buffer. When we learn now from the new pretzel images, we mix them with those from the small buffer to give our neural network the illusion that we actually had all pretzel and other pastry data available at once.&lt;/p&gt;
+&lt;p&gt;In fact, the training phase in CoPE can be divided into two stages. First, it refreshes the prototypes and then uses them to learn better representations. This addresses a first problem with the previously discussed Cross-Entropy error, which updates the prototypes and representations at the same time. In contrast, CoPE first updates the prototypes with the available representations of the new task images mixed with images from the small replay buffer. Only then, the neural network itself is improved to get better representations, while already exploiting the improved prototypes. This can be seen as a type of look-ahead, where the prototype of better quality is used immediately instead of in the next update.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. Update Prototype&lt;/strong&gt;
+
+
+&lt;div class=&#34;box&#34;&gt;
+  &lt;img src=&#34;update_proto_crop.png&#34; width=&#34;&#34;&gt;
+  &lt;div class=&#34;fig-caption&#34;&gt;
+    The donut prototype is slightly changed towards the representation of the donut image. This makes the prototype better in representing all the donut images.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;!-- &lt;img src=&#34;update_proto_crop.png&#34;  width=&#34;600&#34;&gt;
+*The donut prototype is slightly changed towards the representation of the donut image. This makes the prototype better in representing all the donut images.* --&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;2. Update representation using the prototypes&lt;/strong&gt;
+
+
+&lt;div class=&#34;box&#34;&gt;
+  &lt;img src=&#34;update_repr.png&#34; width=&#34;&#34;&gt;
+  &lt;div class=&#34;fig-caption&#34;&gt;
+    The neural network connections are changed to make the representation of the donut image more similar to its prototype and more dissimilar to other concept prototypes such as the croissant prototype.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;!-- &lt;img src=&#34;update_repr.png&#34;  width=&#34;600&#34;&gt;
+*The neural network connections are changed to make the representation of the donut image more similar to its prototype and more dissimilar to other concept prototypes such as the croissant prototype.* --&gt;
+&lt;p&gt;A second problem in the Cross-Entropy error is that it blindly changes all the other concept prototypes, leading to catastrophic forgetting of old concepts. To tackle this issue, CoPE proposes a new Pseudo-Prototypical Proxy error function (PPP error), which doesn&amp;rsquo;t alter &lt;em&gt;any&lt;/em&gt; of the prototypes. Instead, it updates only the representations. This PPP error makes the representations of a concept more similar to their prototype, and decreases similarity to the other concept prototypes. This is reminiscent to contrastive error functions often used in representation learning.
+However, in the PPP error, the representation of each image also acts as a pseudo-prototype for the other representations being processed. Basically, this means that when multiple images of the same &lt;em&gt;donut&lt;/em&gt; concept are being processed, the representation of one image will also be used for the other as a stand-in of the donut prototype. This gives incentive for all images of the same concept to become similar to their prototype, reducing the chance that they end up matching better with a wrong prototype.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Using pseudo-prototypes in the PPP error function:&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;div class=&#34;box&#34;&gt;
+  &lt;img src=&#34;pseudo_proto.png&#34; width=&#34;&#34;&gt;
+  &lt;div class=&#34;fig-caption&#34;&gt;
+    The representation of the second donut image is updated to better match the donut prototype, but also the representation of the first donut image, which acts as a pseudo-prototype.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- &lt;img src=&#34;pseudo_proto.png&#34; width=&#34;600&#34;&gt;
+*The representation of the second donut image is updated to better match the donut prototype, but also the representation of the first donut image, which acts as a pseudo-prototype.* --&gt;
+&lt;p&gt;In conclusion, mixing the next task data with a small replay buffer, combined with addressing these two problems in the Cross-entropy error, shows to have striking improvements over other replay methods when learning from data streams.&lt;/p&gt;
+&lt;p&gt;This introduction to the surging field of Continual Learning and one of its methods are part of a much larger effort. Prof. Tuytelaars&#39; lab has worked on many other aspects of continual learning, among which &lt;a href=&#34;https://arxiv.org/abs/2104.07446&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;a fundamental study of replay&lt;/a&gt;, &lt;a href=&#34;https://openaccess.thecvf.com/content_ECCV_2018/html/Rahaf_Aljundi_Memory_Aware_Synapses_ECCV_2018_paper.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;regularization methods&lt;/a&gt;, &lt;a href=&#34;https://openaccess.thecvf.com/content_CVPR_2019/papers/Aljundi_Task-Free_Continual_Learning_CVPR_2019_paper.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;task-free continual learning&lt;/a&gt;, &lt;a href=&#34;https://openaccess.thecvf.com/content_CVPR_2020/html/De_Lange_Unsupervised_Model_Personalization_While_Preserving_Privacy_and_Scalability_An_Open_CVPR_2020_paper.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;scalable user adaptation&lt;/a&gt;, and an &lt;a href=&#34;https://homes.esat.kuleuven.be/~konijn/publications/2020/DeLange2.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;extensive survey&lt;/a&gt;. Furthermore, her lab is active in the &lt;a href=&#34;https://www.continualai.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ContinualAI&lt;/a&gt; community, maintaining &lt;a href=&#34;https://wiki.continualai.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;a wiki&lt;/a&gt;, &lt;a href=&#34;https://github.com/ContinualAI/avalanche&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;open-source code&lt;/a&gt;, and &lt;a href=&#34;https://sites.google.com/view/clvision2021/overview&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;workshops&lt;/a&gt; that make Continual Learning easily accesible for everyone, and where you can continue your journey if you can&amp;rsquo;t get enough of this topic. Note that we are not responsible for catastrophic forgetting upon reading this article.&lt;/p&gt;
+
+
+&lt;div class=&#34;box&#34;&gt;
+  &lt;img src=&#34;Final_Artwork_cartoon_NN.jpg&#34; width=&#34;&#34;&gt;
+  &lt;div class=&#34;fig-caption&#34;&gt;
+    An illustration of catastrophic forgetting in neural networks. Cartoon credits @Jasper De Lange.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- &lt;img src=&#34;Final_Artwork_cartoon_NN.jpg&#34;  width=&#34;800&#34;&gt;
+*An illustration of catastrophic forgetting in neural networks. Cartoon credits @Jasper De Lange.* --&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
